@@ -146,6 +146,7 @@
             background: linear-gradient(135deg, var(--ai-blue), var(--white));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .page-hero p {
@@ -296,6 +297,51 @@
             border-left: 4px solid var(--ai-blue);
         }
 
+        /* LOADING ANIMATION */
+        .ai-loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .ai-loading.active {
+            display: block;
+        }
+
+        .loading-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .loading-dots span {
+            width: 10px;
+            height: 10px;
+            background: var(--ai-blue);
+            border-radius: 50%;
+            animation: pulse 1.4s ease-in-out infinite;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+        }
+
         /* FOOTER */
         footer {
             background: var(--primary);
@@ -374,42 +420,57 @@
             <div class="ai-form">
                 <form id="strategyForm">
                     <div class="form-group">
-                        <label class="form-label">Business Name</label>
+                        <label class="form-label">Business Name *</label>
                         <input type="text" class="form-control" id="businessName" placeholder="Enter your business name" required>
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">Industry</label>
+                        <label class="form-label">Industry *</label>
                         <select class="form-control" id="industry" required>
                             <option value="">Select your industry</option>
                             <option value="ecommerce">E-commerce & Retail</option>
                             <option value="restaurant">Restaurant & Food Service</option>
-                            <option value="technology">Technology</option>
+                            <option value="technology">Technology & SaaS</option>
                             <option value="realestate">Real Estate</option>
-                            <option value="education">Education</option>
+                            <option value="health">Health & Wellness</option>
+                            <option value="education">Education & Training</option>
+                            <option value="tourism">Tourism & Hospitality</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">Monthly Marketing Budget</label>
+                        <label class="form-label">Monthly Marketing Budget *</label>
                         <input type="range" class="form-slider" id="budgetSlider" min="500" max="10000" step="100" value="2000">
                         <div class="slider-value" id="budgetValue">$2,000</div>
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">Primary Goal</label>
+                        <label class="form-label">Primary Goal *</label>
                         <select class="form-control" id="primaryGoal" required>
                             <option value="">Select primary goal</option>
-                            <option value="awareness">Brand Awareness</option>
-                            <option value="leads">Generate Leads</option>
-                            <option value="sales">Increase Sales</option>
+                            <option value="awareness">Increase Brand Awareness</option>
+                            <option value="leads">Generate More Leads</option>
+                            <option value="sales">Increase Sales/Revenue</option>
+                            <option value="engagement">Improve Customer Engagement</option>
                             <option value="traffic">Drive Website Traffic</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">Target Audience</label>
-                        <input type="text" class="form-control" id="targetAudience" placeholder="e.g., Young professionals 25-40" required>
+                        <label class="form-label">Target Audience *</label>
+                        <input type="text" class="form-control" id="targetAudience" placeholder="e.g., Young professionals aged 25-40" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Current Monthly Website Visitors</label>
+                        <select class="form-control" id="websiteTraffic">
+                            <option value="">Select traffic level</option>
+                            <option value="0-1000">0 - 1,000 visitors</option>
+                            <option value="1000-5000">1,000 - 5,000 visitors</option>
+                            <option value="5000-10000">5,000 - 10,000 visitors</option>
+                            <option value="10000+">10,000+ visitors</option>
+                        </select>
                     </div>
                     
                     <button type="button" class="btn-ai" onclick="generateStrategy()">
@@ -429,27 +490,59 @@
                     </div>
                 </div>
                 
+                <!-- Loading Animation -->
+                <div class="ai-loading" id="aiLoading">
+                    <div class="ai-icon" style="margin: 0 auto 1rem;">
+                        <i class="fas fa-cog fa-spin"></i>
+                    </div>
+                    <h4 style="color: var(--ai-blue);">AI Generating Your Strategy</h4>
+                    <p style="color: var(--gray);">Analyzing your business data and creating customized recommendations...</p>
+                    <div class="loading-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                
+                <!-- Results Container -->
                 <div id="aiResults">
                     <div class="strategy-section">
-                        <h4 style="color: var(--ai-blue);">30-Day Content Calendar</h4>
-                        <div class="strategy-item">Week 1: Brand awareness campaign</div>
-                        <div class="strategy-item">Week 2: Educational content series</div>
-                        <div class="strategy-item">Week 3: Promotional campaign</div>
-                        <div class="strategy-item">Week 4: Customer testimonials</div>
+                        <h4 style="color: var(--ai-blue);"><i class="fas fa-calendar-alt"></i> 30-Day Content Calendar</h4>
+                        <div class="strategy-item">Week 1: Brand awareness campaign focusing on industry pain points</div>
+                        <div class="strategy-item">Week 2: Educational content series addressing audience needs</div>
+                        <div class="strategy-item">Week 3: Promotional campaign with special offers</div>
+                        <div class="strategy-item">Week 4: Customer testimonials and case studies</div>
                     </div>
                     
                     <div class="strategy-section">
-                        <h4 style="color: var(--ai-blue);">Budget Allocation</h4>
-                        <div class="strategy-item">60% Social Media Ads</div>
-                        <div class="strategy-item">25% Content Creation</div>
-                        <div class="strategy-item">15% SEO Optimization</div>
+                        <h4 style="color: var(--ai-blue);"><i class="fas fa-chart-pie"></i> Budget Allocation</h4>
+                        <div class="strategy-item">65% Social Media Advertising</div>
+                        <div class="strategy-item">25% Content Creation & SEO</div>
+                        <div class="strategy-item">10% Analytics & Optimization</div>
                     </div>
                     
                     <div class="strategy-section">
-                        <h4 style="color: var(--ai-blue);">Expected Results</h4>
-                        <div class="strategy-item">50,000 - 75,000 people reached</div>
+                        <h4 style="color: var(--ai-blue);"><i class="fas fa-bullseye"></i> Expected Results</h4>
+                        <div class="strategy-item">50,000 - 75,000 people reached in your target audience</div>
+                        <div class="strategy-item">5,000 - 10,000 engagements & interactions</div>
                         <div class="strategy-item">500 - 1,000 qualified leads</div>
                         <div class="strategy-item">3x - 5x return on ad spend</div>
+                    </div>
+                    
+                    <div class="strategy-section">
+                        <h4 style="color: var(--ai-blue);"><i class="fas fa-lightbulb"></i> AI Recommendations</h4>
+                        <div class="strategy-item">Focus on Instagram and Facebook for highest engagement</div>
+                        <div class="strategy-item">Post during peak hours: 7-9 PM for maximum visibility</div>
+                        <div class="strategy-item">Use video content for 3x higher engagement rates</div>
+                    </div>
+                    
+                    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid rgba(0,212,255,0.2);">
+                        <button class="btn-ai" onclick="downloadStrategy()">
+                            <i class="fas fa-download"></i> Download Full Strategy PDF
+                        </button>
+                        <p style="text-align: center; margin-top: 1rem; font-size: 0.875rem; color: var(--gray);">
+                            For implementation and expert guidance, <a href="contact.html" style="color: var(--ai-blue);">book a free consultation</a>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -497,7 +590,7 @@
                 }
             });
 
-            // Budget slider
+            // Budget slider functionality
             const budgetSlider = document.getElementById('budgetSlider');
             const budgetValue = document.getElementById('budgetValue');
             
@@ -508,75 +601,136 @@
         });
 
         function generateStrategy() {
+            // Get form values
             const businessName = document.getElementById('businessName').value;
             const industry = document.getElementById('industry').value;
-            const budget = document.getElementById('budgetSlider').value;
+            const budget = parseInt(document.getElementById('budgetSlider').value);
             const goal = document.getElementById('primaryGoal').value;
             const audience = document.getElementById('targetAudience').value;
+            const traffic = document.getElementById('websiteTraffic').value;
 
+            // Validate required fields
             if (!businessName || !industry || !goal || !audience) {
-                alert('Please fill in all fields to generate your strategy.');
+                alert('Please fill in all required fields (marked with *) to generate your strategy.');
                 return;
             }
 
-            // Show loading effect
-            const btn = document.querySelector('.btn-ai');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
-            btn.disabled = true;
+            // Show loading animation
+            const loadingElement = document.getElementById('aiLoading');
+            const resultsElement = document.getElementById('aiResults');
+            const generateButton = document.querySelector('.btn-ai');
+            
+            loadingElement.classList.add('active');
+            resultsElement.style.opacity = '0.5';
+            generateButton.disabled = true;
+            generateButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
 
-            // Simulate AI processing
+            // Map industry names
+            const industryNames = {
+                'ecommerce': 'E-commerce & Retail',
+                'restaurant': 'Restaurant & Food Service',
+                'technology': 'Technology & SaaS',
+                'realestate': 'Real Estate',
+                'health': 'Health & Wellness',
+                'education': 'Education & Training',
+                'tourism': 'Tourism & Hospitality',
+                'other': 'your industry'
+            };
+
+            // Map goal names
+            const goalNames = {
+                'awareness': 'brand awareness',
+                'leads': 'lead generation',
+                'sales': 'sales increase',
+                'engagement': 'customer engagement',
+                'traffic': 'website traffic'
+            };
+
+            // Calculate results based on inputs
             setTimeout(() => {
-                // Update results based on inputs
-                const industryNames = {
-                    'ecommerce': 'E-commerce',
-                    'restaurant': 'Restaurant',
-                    'technology': 'Technology',
-                    'realestate': 'Real Estate',
-                    'education': 'Education'
-                };
-
-                const goalNames = {
-                    'awareness': 'brand awareness',
-                    'leads': 'lead generation',
-                    'sales': 'sales increase',
-                    'traffic': 'website traffic'
-                };
-
-                // Update strategy items
-                const strategyItems = document.querySelectorAll('.strategy-item');
+                // Update content calendar
+                const week1 = document.querySelectorAll('.strategy-item')[0];
+                const week2 = document.querySelectorAll('.strategy-item')[1];
+                const week3 = document.querySelectorAll('.strategy-item')[2];
+                const week4 = document.querySelectorAll('.strategy-item')[3];
                 
-                if (strategyItems.length >= 11) {
-                    strategyItems[0].textContent = `Week 1: ${industryNames[industry]} brand awareness campaign`;
-                    strategyItems[1].textContent = `Week 2: Educational content for ${audience}`;
-                    strategyItems[2].textContent = `Week 3: Promotional campaign for ${goalNames[goal]}`;
-                    strategyItems[3].textContent = `Week 4: Customer success stories`;
-                    
-                    // Budget allocation
-                    strategyItems[4].textContent = `${Math.min(70, 40 + (budget/1000)*10)}% Social Media Ads`;
-                    strategyItems[5].textContent = `${Math.floor((100 - (Math.min(70, 40 + (budget/1000)*10)))*0.7)}% Content Creation`;
-                    strategyItems[6].textContent = `${Math.floor((100 - (Math.min(70, 40 + (budget/1000)*10)))*0.3)}% SEO Optimization`;
-                    
-                    // Expected results
-                    const reach = Math.floor(budget * 25);
-                    const leads = Math.floor(budget * 0.25);
-                    
-                    strategyItems[7].textContent = `${reach.toLocaleString()} - ${Math.floor(reach*1.5).toLocaleString()} people reached`;
-                    strategyItems[8].textContent = `${leads.toLocaleString()} - ${Math.floor(leads*2).toLocaleString()} qualified leads`;
-                    strategyItems[9].textContent = `${Math.min(5, 2 + (budget/2000)).toFixed(1)}x - ${Math.min(8, 4 + (budget/2000)).toFixed(1)}x return on ad spend`;
+                if (week1 && week2 && week3 && week4) {
+                    week1.textContent = `Week 1: ${industryNames[industry]} brand awareness campaign`;
+                    week2.textContent = `Week 2: Educational content for ${audience}`;
+                    week3.textContent = `Week 3: Promotional campaign for ${goalNames[goal]}`;
+                    week4.textContent = `Week 4: Customer success stories showcasing ${industryNames[industry]} results`;
                 }
 
-                // Scroll to results
-                document.getElementById('aiResults').scrollIntoView({ behavior: 'smooth' });
+                // Update budget allocation based on budget
+                const budgetItems = document.querySelectorAll('.strategy-section:nth-child(2) .strategy-item');
+                if (budgetItems.length >= 3) {
+                    const socialPercent = Math.min(70, 40 + (budget/1000)*5);
+                    const contentPercent = Math.floor((100 - socialPercent) * 0.7);
+                    const analyticsPercent = 100 - socialPercent - contentPercent;
+                    
+                    budgetItems[0].textContent = `${socialPercent}% Social Media Advertising`;
+                    budgetItems[1].textContent = `${contentPercent}% Content Creation & SEO`;
+                    budgetItems[2].textContent = `${analyticsPercent}% Analytics & Optimization`;
+                }
 
-                // Reset button
-                btn.innerHTML = originalText;
-                btn.disabled = false;
+                // Update expected results
+                const reach = Math.floor(budget * 25);
+                const engagement = Math.floor(reach * 0.1);
+                const leads = Math.floor(reach * 0.01);
+                const roiMin = Math.min(5, 2 + (budget/2000));
+                const roiMax = Math.min(8, 4 + (budget/2000));
+                
+                const resultItems = document.querySelectorAll('.strategy-section:nth-child(3) .strategy-item');
+                if (resultItems.length >= 4) {
+                    resultItems[0].textContent = `${reach.toLocaleString()} - ${Math.floor(reach*1.5).toLocaleString()} people reached`;
+                    resultItems[1].textContent = `${engagement.toLocaleString()} - ${Math.floor(engagement*2).toLocaleString()} engagements`;
+                    resultItems[2].textContent = `${leads.toLocaleString()} - ${Math.floor(leads*2).toLocaleString()} qualified leads`;
+                    resultItems[3].textContent = `${roiMin.toFixed(1)}x - ${roiMax.toFixed(1)}x return on ad spend`;
+                }
+
+                // Update recommendations
+                const recommendationItems = document.querySelectorAll('.strategy-section:nth-child(4) .strategy-item');
+                if (recommendationItems.length >= 3) {
+                    recommendationItems[0].textContent = `Focus on Instagram and Facebook for engaging ${audience}`;
+                    recommendationItems[1].textContent = `Post during peak hours: 7-9 PM for maximum visibility`;
+                    recommendationItems[2].textContent = `Use video content for 3x higher engagement with ${audience}`;
+                }
+
+                // Update preview header
+                const previewHeader = document.querySelector('.ai-preview-header h3');
+                if (previewHeader) {
+                    previewHeader.textContent = `AI Strategy for ${businessName}`;
+                }
+
+                // Hide loading, show results
+                loadingElement.classList.remove('active');
+                resultsElement.style.opacity = '1';
+                generateButton.disabled = false;
+                generateButton.innerHTML = '<i class="fas fa-brain"></i> Generate AI Strategy';
+
+                // Scroll to results
+                resultsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
                 // Show success message
-                alert(`AI strategy generated successfully for ${businessName}! Your customized plan is ready.`);
-            }, 2000);
+                alert(`✅ AI Strategy Generated Successfully!\n\nYour customized marketing plan for "${businessName}" is ready. The strategy includes:\n\n• 30-Day Content Calendar\n• Budget Allocation\n• Expected Results\n• AI Recommendations\n\nYou can now download the full strategy PDF.`);
+                
+            }, 2500); // 2.5 second delay for realistic AI simulation
         }
+
+        function downloadStrategy() {
+            const businessName = document.getElementById('businessName').value || 'Your Business';
+            
+            alert(`📥 Downloading AI Strategy PDF for ${businessName}...\n\n(Note: This is a demo. In a real implementation, this would generate and download a PDF file.)\n\nYour strategy has been sent to: adpollex@gmail.com\n\nFor a personalized consultation, please contact us.`);
+            
+            // In a real implementation, this would generate and trigger a PDF download
+            // For demo purposes, we'll just show an alert
+        }
+
+        // Form validation
+        document.getElementById('strategyForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent actual form submission
+            generateStrategy();
+        });
     </script>
 </body>
 </html>
