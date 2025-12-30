@@ -3,34 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campaign Performance Simulator | Ad Pollex - Predict Your Marketing Results</title>
+    <title>Campaign Simulator | Ad Pollex</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* ===== SIMULATOR STYLES ===== */
         :root {
             --primary: #000000;
-            --primary-light: #1a1a1a;
             --accent: #FF3B30;
-            --accent-dark: #CC0000;
-            --secondary: #007AFF;
             --simulator-purple: #8A2BE2;
-            --simulator-green: #00C853;
             --white: #FFFFFF;
-            --off-white: #F5F5F7;
             --gray: #8E8E93;
-            --dark-gray: #1D1D1F;
-            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --shadow-sm: 0 2px 20px rgba(0, 0, 0, 0.08);
-            --shadow-md: 0 10px 40px rgba(0, 0, 0, 0.12);
-            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
-            --radius-sm: 8px;
-            --radius-md: 16px;
-            --radius-lg: 24px;
-            --radius-xl: 40px;
+            --transition: all 0.3s ease;
         }
 
         * {
@@ -39,99 +22,30 @@
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
             font-family: 'Inter', sans-serif;
-            line-height: 1.7;
-            color: var(--dark-gray);
-            background: var(--white);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
-        }
-
-        h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-        }
-
-        h2 {
-            font-size: 3rem;
-            color: var(--primary);
-        }
-
-        h3 {
-            font-size: 2rem;
-            color: var(--primary);
-        }
-
-        p {
-            font-size: 1.125rem;
-            line-height: 1.8;
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-        }
-
-        .lead {
-            font-size: 1.375rem;
-            color: var(--primary-light);
             line-height: 1.6;
+            color: #333;
+            background: var(--white);
         }
 
-        .eyebrow {
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        section {
-            position: relative;
-            overflow: hidden;
-            padding: 6rem 0;
-        }
-
-        /* ===== HEADER ===== */
+        /* HEADER & NAVIGATION */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 1000;
-            padding: 1.5rem 0;
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-        }
-
-        header.scrolled {
+            backdrop-filter: blur(10px);
+            z-index: 1000;
             padding: 1rem 0;
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
         }
 
         .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -140,22 +54,22 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.75rem;
             text-decoration: none;
         }
 
         .logo-symbol {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             background: var(--primary);
             color: var(--white);
-            border-radius: 12px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Space Grotesk', sans-serif;
-            font-weight: 900;
-            font-size: 1.5rem;
+            font-weight: 700;
+            font-size: 1.25rem;
         }
 
         .logo-text {
@@ -165,226 +79,127 @@
 
         .logo-main {
             font-family: 'Space Grotesk', sans-serif;
-            font-weight: 800;
-            font-size: 1.5rem;
+            font-weight: 700;
+            font-size: 1.25rem;
             color: var(--primary);
-            letter-spacing: -0.02em;
         }
 
         .logo-sub {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--accent);
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
         }
 
+        /* NAVIGATION TABS */
         .nav-desktop {
             display: flex;
+            gap: 1.5rem;
             align-items: center;
-            gap: 3rem;
         }
 
         .nav-desktop a {
             text-decoration: none;
             color: var(--primary);
             font-weight: 500;
-            font-size: 0.9375rem;
-            position: relative;
-            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
             transition: var(--transition);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.5px;
         }
 
-        .nav-desktop a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: var(--transition);
-        }
-
-        .nav-desktop a:hover,
-        .nav-desktop a.active {
+        .nav-desktop a:hover {
+            background: rgba(255, 59, 48, 0.1);
             color: var(--accent);
         }
 
-        .nav-desktop a:hover::after,
-        .nav-desktop a.active::after {
-            width: 100%;
+        .nav-desktop a.active {
+            background: var(--simulator-purple);
+            color: var(--white);
         }
 
-        /* ===== BUTTONS ===== */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.25rem 2.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: var(--radius-xl);
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .btn-primary {
+        .nav-desktop a.btn-primary {
             background: var(--accent);
             color: var(--white);
-            box-shadow: 0 10px 30px rgba(255, 59, 48, 0.3);
+            padding: 0.75rem 1.5rem;
         }
 
-        .btn-primary:hover {
-            background: var(--accent-dark);
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(255, 59, 48, 0.4);
+        .nav-desktop a.btn-primary:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
         }
 
-        .btn-simulator {
-            background: linear-gradient(135deg, var(--simulator-purple), var(--secondary));
+        /* PAGE HERO */
+        .page-hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #0F0C29 0%, #302B63 100%);
             color: var(--white);
-            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
+            text-align: center;
         }
 
-        .btn-simulator:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(138, 43, 226, 0.4);
-        }
-
-        /* ===== SIMULATOR HERO ===== */
-        .simulator-hero {
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, #0F0C29 0%, #302B63 50%, #24243E 100%);
+        .page-hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
             color: var(--white);
-            padding-top: 8rem;
-            position: relative;
-            overflow: hidden;
         }
 
-        .simulator-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(138, 43, 226, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 122, 255, 0.2) 0%, transparent 50%);
-        }
-
-        .simulator-hero h1 {
-            color: var(--white);
-            background: linear-gradient(135deg, #8A2BE2, #00D4FF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .simulator-hero .lead {
-            color: rgba(255, 255, 255, 0.9);
+        .page-hero p {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.9);
             max-width: 800px;
+            margin: 0 auto 2rem;
         }
 
-        /* ===== SIMULATOR CONTROLS ===== */
+        /* SIMULATOR SECTION */
         .simulator-section {
-            background: var(--off-white);
+            padding: 4rem 2rem;
+            background: #f5f5f7;
         }
 
         .simulator-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: 400px 1fr;
-            gap: 4rem;
-            align-items: start;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
         }
 
         .simulator-controls {
             background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 3rem;
-            box-shadow: var(--shadow-lg);
-            position: sticky;
-            top: 2rem;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
         .control-group {
-            margin-bottom: 2.5rem;
-            padding-bottom: 2.5rem;
-            border-bottom: 2px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .control-group:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
+            margin-bottom: 2rem;
         }
 
         .control-label {
             display: block;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             font-weight: 600;
             color: var(--primary);
-            font-size: 1.125rem;
-        }
-
-        .control-label span {
-            color: var(--simulator-purple);
-            font-weight: 800;
-        }
-
-        .budget-slider-container {
-            margin-top: 2rem;
         }
 
         .budget-slider {
             width: 100%;
-            height: 12px;
-            -webkit-appearance: none;
-            appearance: none;
-            background: linear-gradient(90deg, #8A2BE2, #00D4FF);
-            border-radius: 10px;
-            outline: none;
-            margin: 1.5rem 0;
-        }
-
-        .budget-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 28px;
-            height: 28px;
-            background: var(--white);
-            border: 3px solid var(--simulator-purple);
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin: 1rem 0;
         }
 
         .budget-display {
             text-align: center;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
         }
 
         .budget-amount {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 3rem;
-            font-weight: 800;
+            font-size: 2rem;
+            font-weight: 700;
             color: var(--simulator-purple);
-            line-height: 1;
-        }
-
-        .budget-currency {
-            font-size: 1.5rem;
-            color: var(--gray);
-            margin-left: 0.25rem;
         }
 
         .platform-selector {
@@ -395,381 +210,169 @@
         }
 
         .platform-option {
-            background: var(--off-white);
-            border: 2px solid rgba(0, 0, 0, 0.1);
-            border-radius: var(--radius-md);
-            padding: 1.5rem 1rem;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1rem;
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
         }
 
         .platform-option:hover {
-            background: rgba(138, 43, 226, 0.05);
             border-color: var(--simulator-purple);
-            transform: translateY(-5px);
         }
 
         .platform-option.active {
-            background: rgba(138, 43, 226, 0.1);
+            background: rgba(138,43,226,0.1);
             border-color: var(--simulator-purple);
-            box-shadow: 0 8px 24px rgba(138, 43, 226, 0.2);
         }
 
         .platform-icon {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
             color: var(--simulator-purple);
         }
 
         .radio-group {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            margin-top: 1rem;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
         }
 
         .radio-option {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1rem 1.5rem;
-            background: var(--off-white);
-            border-radius: var(--radius-md);
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: #f8f9fa;
+            border-radius: 8px;
             cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .radio-option:hover {
-            background: rgba(138, 43, 226, 0.05);
         }
 
         .radio-option.active {
-            background: rgba(138, 43, 226, 0.1);
+            background: rgba(138,43,226,0.1);
             border-left: 4px solid var(--simulator-purple);
         }
 
-        .radio-option input[type="radio"] {
-            width: 20px;
-            height: 20px;
-            accent-color: var(--simulator-purple);
-        }
-
-        /* ===== SIMULATOR RESULTS ===== */
-        .simulator-results {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 3rem;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .results-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 2px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .simulator-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--simulator-purple), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        .results-disclaimer {
-            background: rgba(255, 59, 48, 0.1);
-            border-left: 4px solid var(--accent);
-            padding: 1.5rem;
-            border-radius: var(--radius-md);
-            margin-bottom: 3rem;
-        }
-
-        .results-disclaimer h4 {
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .result-card {
-            background: var(--off-white);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            text-align: center;
-            transition: var(--transition);
-            border: 2px solid transparent;
-        }
-
-        .result-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-md);
-            border-color: var(--simulator-purple);
-        }
-
-        .result-value {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--simulator-purple);
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-
-        .result-label {
-            font-size: 1rem;
-            color: var(--gray);
-            font-weight: 600;
-        }
-
-        .result-change {
-            font-size: 0.875rem;
-            color: var(--simulator-green);
-            font-weight: 600;
-            margin-top: 0.5rem;
-        }
-
-        .result-change.negative {
-            color: var(--accent);
-        }
-
-        .chart-container {
-            margin: 3rem 0;
-            padding: 2rem;
-            background: var(--off-white);
-            border-radius: var(--radius-lg);
-        }
-
-        .comparison-section {
-            margin-top: 3rem;
-            padding-top: 3rem;
-            border-top: 2px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .comparison-card {
-            background: var(--off-white);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-        }
-
-        .comparison-card h4 {
-            color: var(--simulator-purple);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .comparison-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .comparison-item:last-child {
-            border-bottom: none;
-        }
-
-        .comparison-label {
-            color: var(--gray);
-        }
-
-        .comparison-value {
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        /* ===== CTA SECTION ===== */
-        .simulator-cta {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        .btn-simulator {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--simulator-purple), #4A00E0);
             color: var(--white);
-            text-align: center;
-        }
-
-        .simulator-cta h2 {
-            color: var(--white);
-        }
-
-        .simulator-cta .lead {
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            background: var(--primary);
-            color: var(--white);
-            padding: 6rem 0 3rem;
-        }
-
-        .footer-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        .footer-brand {
-            max-width: 300px;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
             text-decoration: none;
-        }
-
-        .footer-logo .logo-symbol {
-            background: var(--white);
-            color: var(--primary);
-        }
-
-        .footer-logo .logo-main {
-            color: var(--white);
-        }
-
-        .footer-description {
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 2rem;
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .footer-social a {
-            width: 44px;
-            height: 44px;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--white);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-social a:hover {
-            background: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        .footer-links h4 {
-            color: var(--white);
-            margin-bottom: 1.5rem;
-            font-size: 1.125rem;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.75rem;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
             transition: var(--transition);
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .btn-simulator:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(138,43,226,0.3);
+        }
+
+        /* RESULTS */
+        .simulator-results {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .result-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .result-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--simulator-purple);
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-top: 0.25rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
         }
 
         .footer-links a:hover {
             color: var(--accent);
-            transform: translateX(5px);
         }
 
-        .footer-bottom {
-            text-align: center;
-            padding-top: 3rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1200px) {
-            .simulator-container {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-            .simulator-controls {
-                position: static;
-            }
-        }
-
-        @media (max-width: 992px) {
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
             .nav-desktop {
                 display: none;
             }
-            .platform-selector {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 1.5rem;
-            }
-            h1 {
-                font-size: 3rem;
-            }
-            h2 {
+            
+            .page-hero h1 {
                 font-size: 2.5rem;
             }
-            section {
-                padding: 4rem 0;
+            
+            .simulator-container {
+                grid-template-columns: 1fr;
             }
-            .simulator-controls,
-            .simulator-results {
-                padding: 2rem;
-            }
+            
             .results-grid {
                 grid-template-columns: 1fr;
             }
-            .budget-amount {
-                font-size: 2.5rem;
+            
+            .platform-selector {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header id="mainHeader">
-        <div class="container header-container">
+    <header>
+        <div class="header-container">
             <a href="index.html" class="logo">
                 <div class="logo-symbol">AP</div>
                 <div class="logo-text">
                     <div class="logo-main">Ad Pollex</div>
-                    <div class="logo-sub">AI-Powered Marketing</div>
+                    <div class="logo-sub">AI Marketing</div>
                 </div>
             </a>
             
@@ -779,455 +382,280 @@
                 <a href="ai-strategy.html">AI Strategy</a>
                 <a href="simulator.html" class="active">Simulator</a>
                 <a href="portfolio.html">Portfolio</a>
-                <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
-                <a href="dashboard.html" class="btn btn-primary">Client Login</a>
+                <a href="dashboard.html" class="btn-primary">Client Login</a>
             </nav>
         </div>
     </header>
 
-    <!-- Simulator Hero -->
-    <section class="simulator-hero">
-        <div class="container">
-            <div class="eyebrow" style="color: #00D4FF;">Campaign Performance Simulator</div>
-            <h1>Predict Your Marketing Results <span style="display: block; color: #8A2BE2;">Before You Invest</span></h1>
-            <p class="lead">Adjust budget, platform, and targeting to see predicted reach, engagement, and ROI. Make data-driven decisions with our AI-powered simulator.</p>
-            <div style="margin-top: 3rem;">
-                <a href="#simulator" class="btn btn-simulator">
-                    <i class="fas fa-play"></i> Launch Simulator →
-                </a>
-            </div>
+    <section class="page-hero">
+        <div class="hero-content">
+            <h1>Campaign Performance Simulator</h1>
+            <p>Predict your marketing results before investing. Adjust budget, platform, and targeting to see predicted reach, engagement, and ROI.</p>
         </div>
     </section>
 
-    <!-- Simulator Section -->
-    <section class="simulator-section" id="simulator">
-        <div class="container">
-            <div class="eyebrow">Live Simulator</div>
-            <h2>Adjust & <span style="color: var(--simulator-purple);">Predict Results</span></h2>
-            <p class="lead">Real-time predictions based on historical data and AI algorithms.</p>
-            
-            <div class="simulator-container">
-                <!-- Simulator Controls -->
-                <div class="simulator-controls">
-                    <div class="control-group">
-                        <label class="control-label">Monthly Budget: <span id="budgetValue">$2,000</span></label>
-                        <div class="budget-slider-container">
-                            <input type="range" class="budget-slider" id="budgetSlider" min="100" max="10000" step="100" value="2000">
-                            <div class="budget-display">
-                                <span class="budget-amount" id="budgetAmount">2,000</span>
-                                <span class="budget-currency">USD</span>
-                            </div>
-                        </div>
+    <section class="simulator-section">
+        <div class="simulator-container">
+            <div class="simulator-controls">
+                <div class="control-group">
+                    <label class="control-label">Monthly Budget</label>
+                    <input type="range" class="budget-slider" id="budgetSlider" min="500" max="10000" step="100" value="2000">
+                    <div class="budget-display">
+                        <div class="budget-amount" id="budgetValue">$2,000</div>
                     </div>
-                    
-                    <div class="control-group">
-                        <label class="control-label">Primary Platform</label>
-                        <div class="platform-selector">
-                            <div class="platform-option active" data-platform="facebook">
-                                <div class="platform-icon">
-                                    <i class="fab fa-facebook"></i>
-                                </div>
-                                <div>Facebook</div>
-                            </div>
-                            <div class="platform-option" data-platform="instagram">
-                                <div class="platform-icon">
-                                    <i class="fab fa-instagram"></i>
-                                </div>
-                                <div>Instagram</div>
-                            </div>
-                            <div class="platform-option" data-platform="tiktok">
-                                <div class="platform-icon">
-                                    <i class="fab fa-tiktok"></i>
-                                </div>
-                                <div>TikTok</div>
-                            </div>
-                            <div class="platform-option" data-platform="google">
-                                <div class="platform-icon">
-                                    <i class="fab fa-google"></i>
-                                </div>
-                                <div>Google Ads</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label class="control-label">Campaign Type</label>
-                        <div class="radio-group">
-                            <label class="radio-option active">
-                                <input type="radio" name="campaignType" value="awareness" checked>
-                                <span>Brand Awareness</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="campaignType" value="traffic">
-                                <span>Website Traffic</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="campaignType" value="conversions">
-                                <span>Conversions</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="campaignType" value="leads">
-                                <span>Lead Generation</span>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label class="control-label">Targeting</label>
-                        <div class="radio-group">
-                            <label class="radio-option active">
-                                <input type="radio" name="targeting" value="broad" checked>
-                                <span>Broad (General Audience)</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="targeting" value="specific">
-                                <span>Specific (Interest-based)</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="targeting" value="lookalike">
-                                <span>Lookalike Audience</span>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label class="control-label">Campaign Duration</label>
-                        <div class="radio-group">
-                            <label class="radio-option active">
-                                <input type="radio" name="duration" value="30" checked>
-                                <span>30 Days</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="duration" value="60">
-                                <span>60 Days</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="duration" value="90">
-                                <span>90 Days</span>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <button id="simulateBtn" class="btn btn-simulator" style="width: 100%; padding: 1.5rem;">
-                        <i class="fas fa-chart-line"></i> Simulate Campaign
-                    </button>
                 </div>
                 
-                <!-- Simulator Results -->
-                <div class="simulator-results">
-                    <div class="results-header">
-                        <div class="simulator-icon">
-                            <i class="fas fa-chart-bar"></i>
-                        </div>
-                        <div>
-                            <h3 style="margin: 0; color: var(--simulator-purple);">Predicted Results</h3>
-                            <p style="margin: 0; color: var(--gray);">Based on your selections</p>
-                        </div>
-                    </div>
-                    
-                    <div class="results-disclaimer">
-                        <h4><i class="fas fa-exclamation-triangle"></i> Important Disclaimer</h4>
-                        <p>These are <strong>estimates based on historical data and AI predictions</strong>, not guarantees. Actual results may vary based on market conditions, creative quality, and other factors. For accurate projections, consult with our strategy team.</p>
-                    </div>
-                    
-                    <div class="results-grid">
-                        <div class="result-card">
-                            <div class="result-value" id="resultReach">50K</div>
-                            <div class="result-label">Total Reach</div>
-                            <div class="result-change" id="reachChange">+25% vs. average</div>
-                        </div>
-                        
-                        <div class="result-card">
-                            <div class="result-value" id="resultEngagement">5K</div>
-                            <div class="result-label">Engagements</div>
-                            <div class="result-change" id="engagementChange">+18% vs. average</div>
-                        </div>
-                        
-                        <div class="result-card">
-                            <div class="result-value" id="resultLeads">500</div>
-                            <div class="result-label">Qualified Leads</div>
-                            <div class="result-change" id="leadsChange">+32% vs. average</div>
-                        </div>
-                        
-                        <div class="result-card">
-                            <div class="result-value" id="resultROI">3.5x</div>
-                            <div class="result-label">ROI</div>
-                            <div class="result-change" id="roiChange">+40% vs. average</div>
-                        </div>
-                    </div>
-                    
-                    <div class="chart-container">
-                        <h4 style="margin-bottom: 2rem; color: var(--simulator-purple);">
-                            <i class="fas fa-chart-pie"></i> Performance Breakdown
-                        </h4>
-                        <canvas id="performanceChart" height="250"></canvas>
-                    </div>
-                    
-                    <div class="comparison-section">
-                        <h4 style="color: var(--simulator-purple);">
-                            <i class="fas fa-balance-scale"></i> Platform Comparison
-                        </h4>
-                        <p>How your selected platform compares to alternatives for your campaign type:</p>
-                        
-                        <div class="comparison-grid">
-                            <div class="comparison-card">
-                                <h4><i class="fab fa-facebook"></i> Facebook</h4>
-                                <div class="comparison-item">
-                                    <span class="comparison-label">Cost per Click</span>
-                                    <span class="comparison-value">$0.97</span>
-                                </div>
-                                <div class="comparison-item">
-                                    <span class="comparison-label">Engagement Rate</span>
-                                    <span class="comparison-value">1.8%</span>
-                                </div>
-                                <div class="comparison-item">
-                                    <span class="comparison-label">Conversion Rate</span>
-                                    <span class="comparison-value">3.2%</span>
-                                </div>
+                <div class="control-group">
+                    <label class="control-label">Primary Platform</label>
+                    <div class="platform-selector">
+                        <div class="platform-option active" data-platform="facebook">
+                            <div class="platform-icon">
+                                <i class="fab fa-facebook"></i>
                             </div>
-                            
-                            <div class="comparison-card">
-                                <h4><i class="fab fa-instagram"></i> Instagram</h4>
-                                <div class="comparison-item">
-                                    <span class="comparison-label">Cost per Click</span>
-                                    <span class="comparison-value">$1.25</span>
-                                </div>
-                                <div class="comparison-item">
-                                    <span class="comparison-label">Engagement Rate</span>
-                                    <span class="comparison-value">2.4%</span>
-                                </div>
-                                <div class="comparison-item">
-                                    <span class="comparison-label">Conversion Rate</span>
-                                    <span class="comparison-value">2.8%</span>
-                                </div>
-                            </div>
-                            
-                            <div class="comparison-card">
-                                <h4><i class="fab fa-google"></i> Google Ads</h4>
-                                <div class="comparison-item">
-                                    <span class="comparison-label">Cost per Click</span>
-                                    <span class="comparison-value">$2.15</span>
-                                </div>
-                                <div class="comparison-item">
-                                    <span class="comparison-label">Engagement Rate</span>
-                                    <span class="comparison-value">0.9%</span>
-                                </div>
-                                <div class="comparison-item">
-                                    <span class="comparison-label">Conversion Rate</span>
-                                    <span class="comparison-value">4.5%</span>
-                                </div>
-                            </div>
+                            <div>Facebook</div>
                         </div>
-                    </div>
-                    
-                    <div style="margin-top: 3rem; padding: 2rem; background: rgba(138, 43, 226, 0.05); border-radius: var(--radius-lg);">
-                        <h4 style="color: var(--simulator-purple); margin-bottom: 1rem;">Ready to Launch?</h4>
-                        <p style="margin-bottom: 1.5rem;">Get expert guidance and implementation for your campaign.</p>
-                        <a href="contact.html" class="btn btn-simulator">
-                            <i class="fas fa-rocket"></i> Book Strategy Session
-                        </a>
+                        <div class="platform-option" data-platform="instagram">
+                            <div class="platform-icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <div>Instagram</div>
+                        </div>
+                        <div class="platform-option" data-platform="google">
+                            <div class="platform-icon">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <div>Google Ads</div>
+                        </div>
+                        <div class="platform-option" data-platform="tiktok">
+                            <div class="platform-icon">
+                                <i class="fab fa-tiktok"></i>
+                            </div>
+                            <div>TikTok</div>
+                        </div>
                     </div>
                 </div>
+                
+                <div class="control-group">
+                    <label class="control-label">Campaign Type</label>
+                    <div class="radio-group">
+                        <label class="radio-option active">
+                            <input type="radio" name="campaignType" value="awareness" checked>
+                            <span>Brand Awareness</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="campaignType" value="leads">
+                            <span>Lead Generation</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="campaignType" value="sales">
+                            <span>Sales Conversion</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">Targeting</label>
+                    <div class="radio-group">
+                        <label class="radio-option active">
+                            <input type="radio" name="targeting" value="broad" checked>
+                            <span>Broad Audience</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="targeting" value="specific">
+                            <span>Specific Targeting</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="targeting" value="lookalike">
+                            <span>Lookalike Audience</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <button class="btn-simulator" onclick="runSimulation()">
+                    <i class="fas fa-chart-line"></i> Simulate Campaign
+                </button>
             </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="simulator-cta">
-        <div class="container">
-            <h2>From Simulation to <span style="color: #00D4FF;">Real Results</span></h2>
-            <p class="lead">Our team transforms predictions into measurable success stories.</p>
             
-            <div style="margin-top: 3rem; display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-                <a href="contact.html" class="btn btn-simulator" style="background: linear-gradient(135deg, #8A2BE2, #00D4FF);">
-                    <i class="fas fa-calendar"></i> Schedule Free Consultation
-                </a>
-                <a href="portfolio.html" class="btn btn-primary">
-                    <i class="fas fa-chart-line"></i> View Case Studies
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-container">
-                <div class="footer-brand">
-                    <a href="index.html" class="footer-logo">
-                        <div class="logo-symbol">AP</div>
-                        <div class="logo-text">
-                            <div class="logo-main">Ad Pollex</div>
-                        </div>
+            <div class="simulator-results">
+                <h3 style="color: var(--simulator-purple); margin-bottom: 1rem;">Predicted Results</h3>
+                <p style="color: var(--gray); margin-bottom: 2rem;">Based on your selections and historical data</p>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-value" id="resultReach">50K</div>
+                        <div class="result-label">Total Reach</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value" id="resultEngagement">5K</div>
+                        <div class="result-label">Engagements</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value" id="resultLeads">500</div>
+                        <div class="result-label">Qualified Leads</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value" id="resultROI">3.5x</div>
+                        <div class="result-label">ROI</div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(138,43,226,0.1); padding: 1.5rem; border-radius: 8px; margin-top: 2rem;">
+                    <h4 style="color: var(--simulator-purple); margin-bottom: 0.5rem;">AI Recommendations</h4>
+                    <p style="color: var(--gray); margin-bottom: 1rem;" id="recommendations">Focus on video content for highest engagement. Post during peak hours 7-9 PM.</p>
+                    <a href="contact.html" class="btn-simulator" style="font-size: 1rem; padding: 0.75rem 1.5rem;">
+                        <i class="fas fa-calendar"></i> Book Strategy Session
                     </a>
-                    <p class="footer-description">AI-powered digital marketing agency helping businesses grow their online presence since 2016.</p>
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
-                        <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
-                        <li><a href="ai-strategy.html"><i class="fas fa-chevron-right"></i> AI Strategy Generator</a></li>
-                        <li><a href="simulator.html"><i class="fas fa-chevron-right"></i> Campaign Simulator</a></li>
-                        <li><a href="portfolio.html"><i class="fas fa-chevron-right"></i> Portfolio</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><a href="services.html#digital-marketing"><i class="fas fa-chevron-right"></i> Digital Marketing</a></li>
-                        <li><a href="services.html#social-media"><i class="fas fa-chevron-right"></i> Social Media</a></li>
-                        <li><a href="services.html#seo"><i class="fas fa-chevron-right"></i> SEO Optimization</a></li>
-                        <li><a href="services.html#branding"><i class="fas fa-chevron-right"></i> Brand Strategy</a></li>
-                        <li><a href="services.html#web-design"><i class="fas fa-chevron-right"></i> Website Design</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Contact Info</h4>
-                    <ul>
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Dar es Salaam, Tanzania</a></li>
-                        <li><a href="tel:+255684320325"><i class="fas fa-phone"></i> +255 684 320 325</a></li>
-                        <li><a href="mailto:adpollex@gmail.com"><i class="fas fa-envelope"></i> adpollex@gmail.com</a></li>
-                        <li><a href="#"><i class="fas fa-globe"></i> www.adpollex.com</a></li>
-                    </ul>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div>
+                <a href="index.html" class="logo" style="margin-bottom: 1.5rem;">
+                    <div class="logo-symbol">AP</div>
+                    <div class="logo-text">
+                        <div class="logo-main" style="color: white;">Ad Pollex</div>
+                    </div>
+                </a>
+                <p style="color: rgba(255,255,255,0.7);">AI-powered digital marketing agency since 2016.</p>
+            </div>
             
-            <div class="footer-bottom">
-                <p>&copy; 2023 <span style="color: var(--accent);">Ad Pollex</span> - AI-Powered Digital Marketing Agency. All Rights Reserved.</p>
+            <div class="footer-links">
+                <h4 style="margin-bottom: 1rem;">Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="ai-strategy.html">AI Strategy</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4 style="margin-bottom: 1rem;">Contact</h4>
+                <a href="tel:+255684320325">+255 684 320 325</a>
+                <a href="mailto:adpollex@gmail.com">adpollex@gmail.com</a>
+                <p style="color: rgba(255,255,255,0.7); margin-top: 0.5rem;">Dar es Salaam, Tanzania</p>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
     <script>
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('mainHeader');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-desktop a');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
 
-        // Platform selection
-        const platformOptions = document.querySelectorAll('.platform-option');
-        platformOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                platformOptions.forEach(opt => opt.classList.remove('active'));
-                this.classList.add('active');
-                updateSimulation();
+            // Budget slider
+            const budgetSlider = document.getElementById('budgetSlider');
+            const budgetValue = document.getElementById('budgetValue');
+            
+            budgetSlider.addEventListener('input', function() {
+                const value = parseInt(this.value);
+                budgetValue.textContent = `$${value.toLocaleString()}`;
+            });
+
+            // Platform selection
+            const platformOptions = document.querySelectorAll('.platform-option');
+            platformOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    platformOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Radio selection
+            const radioOptions = document.querySelectorAll('.radio-option');
+            radioOptions.forEach(option => {
+                const radioInput = option.querySelector('input[type="radio"]');
+                radioInput.addEventListener('change', function() {
+                    radioOptions.forEach(opt => opt.classList.remove('active'));
+                    option.classList.add('active');
+                });
             });
         });
 
-        // Radio selection
-        const radioOptions = document.querySelectorAll('.radio-option');
-        radioOptions.forEach(option => {
-            const radioInput = option.querySelector('input[type="radio"]');
-            radioInput.addEventListener('change', function() {
-                radioOptions.forEach(opt => opt.classList.remove('active'));
-                option.classList.add('active');
-                updateSimulation();
-            });
-        });
-
-        // Budget slider
-        const budgetSlider = document.getElementById('budgetSlider');
-        const budgetValue = document.getElementById('budgetValue');
-        const budgetAmount = document.getElementById('budgetAmount');
-        
-        budgetSlider.addEventListener('input', function() {
-            const value = parseInt(this.value);
-            budgetValue.textContent = `$${value.toLocaleString()}`;
-            budgetAmount.textContent = value.toLocaleString();
-            updateSimulation();
-        });
-
-        // Chart instance
-        let performanceChart = null;
-
-        // Update simulation results
-        function updateSimulation() {
-            // Get all values
-            const budget = parseInt(budgetSlider.value);
-            const selectedPlatform = document.querySelector('.platform-option.active').dataset.platform;
+        function runSimulation() {
+            const budget = parseInt(document.getElementById('budgetSlider').value);
+            const platform = document.querySelector('.platform-option.active').dataset.platform;
             const campaignType = document.querySelector('input[name="campaignType"]:checked').value;
             const targeting = document.querySelector('input[name="targeting"]:checked').value;
-            const duration = parseInt(document.querySelector('input[name="duration"]:checked').value);
-            
-            // Calculate results based on inputs
-            let reachMultiplier, engagementMultiplier, leadsMultiplier, roiMultiplier;
-            
-            // Platform multipliers
-            const platformMultipliers = {
-                'facebook': { reach: 25, engagement: 0.0025, leads: 0.00025, roi: 3.5 },
-                'instagram': { reach: 20, engagement: 0.003, leads: 0.0002, roi: 3.0 },
-                'tiktok': { reach: 35, engagement: 0.004, leads: 0.00015, roi: 2.5 },
-                'google': { reach: 10, engagement: 0.001, leads: 0.0004, roi: 4.5 }
-            };
-            
-            // Campaign type multipliers
-            const campaignMultipliers = {
-                'awareness': { reach: 1.3, engagement: 1.2, leads: 0.8, roi: 2.5 },
-                'traffic': { reach: 1.1, engagement: 1.1, leads: 1.0, roi: 3.0 },
-                'conversions': { reach: 0.9, engagement: 0.9, leads: 1.4, roi: 4.0 },
-                'leads': { reach: 1.0, engagement: 1.0, leads: 1.3, roi: 3.8 }
-            };
-            
-            // Targeting multipliers
-            const targetingMultipliers = {
-                'broad': { reach: 1.5, engagement: 0.8, leads: 0.7, roi: 2.0 },
-                'specific': { reach: 1.0, engagement: 1.2, leads: 1.2, roi: 3.5 },
-                'lookalike': { reach: 0.8, engagement: 1.5, leads: 1.5, roi: 4.0 }
-            };
-            
-            // Duration multiplier (longer campaigns get efficiency benefits)
-            const durationMultiplier = 1 + (duration - 30) * 0.01;
-            
-            // Calculate base values
-            const platform = platformMultipliers[selectedPlatform];
-            const campaign = campaignMultipliers[campaignType];
-            const target = targetingMultipliers[targeting];
-            
-            const reach = Math.floor(budget * platform.reach * campaign.reach * target.reach * durationMultiplier);
-            const engagement = Math.floor(reach * platform.engagement * campaign.engagement * target.engagement);
-            const leads = Math.floor(reach * platform.leads * campaign.leads * target.leads);
-            const roi = (platform.roi * campaign.roi * target.roi * durationMultiplier).toFixed(1);
-            
-            // Update result cards
-            document.getElementById('resultReach').textContent = formatNumber(reach);
-            document.getElementById('resultEngagement').textContent = formatNumber(engagement);
-            document.getElementById('resultLeads').textContent = formatNumber(leads);
-            document.getElementById('resultROI').textContent = `${roi}x`;
-            
-            // Update change indicators (simplified)
-            const reachChange = Math.floor((Math.random() * 30) + 10);
-            const engagementChange = Math.floor((Math.random() * 25) + 5);
-            const leadsChange = Math.floor((Math.random() * 40) + 15);
-            const roiChange = Math.floor((Math.random() * 50) + 20);
-            
-            document.getElementById('reachChange').textContent = `+${reachChange}% vs. average`;
-            document.getElementById('engagementChange').textContent = `+${engagementChange}% vs. average`;
-            document.getElementById('leadsChange').textContent = `+${leadsChange}% vs. average`;
-            document.getElementById('roiChange').textContent = `+${roiChange}% vs. average`;
-            
-            // Update chart
-            updateChart(reach, engagement, leads, roi);
+
+            // Show loading
+            const btn = document.querySelector('.btn-simulator');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Simulating...';
+            btn.disabled = true;
+
+            // Calculate predictions based on inputs
+            setTimeout(() => {
+                const platformMultipliers = {
+                    'facebook': { reach: 25, engagement: 0.0025, leads: 0.00025, roi: 3.5 },
+                    'instagram': { reach: 20, engagement: 0.003, leads: 0.0002, roi: 3.0 },
+                    'google': { reach: 10, engagement: 0.001, leads: 0.0004, roi: 4.5 },
+                    'tiktok': { reach: 35, engagement: 0.004, leads: 0.00015, roi: 2.5 }
+                };
+
+                const campaignMultipliers = {
+                    'awareness': { reach: 1.3, engagement: 1.2, leads: 0.8, roi: 2.5 },
+                    'leads': { reach: 1.0, engagement: 1.0, leads: 1.3, roi: 3.8 },
+                    'sales': { reach: 0.9, engagement: 0.9, leads: 1.4, roi: 4.0 }
+                };
+
+                const targetingMultipliers = {
+                    'broad': { reach: 1.5, engagement: 0.8, leads: 0.7, roi: 2.0 },
+                    'specific': { reach: 1.0, engagement: 1.2, leads: 1.2, roi: 3.5 },
+                    'lookalike': { reach: 0.8, engagement: 1.5, leads: 1.5, roi: 4.0 }
+                };
+
+                const platformData = platformMultipliers[platform];
+                const campaignData = campaignMultipliers[campaignType];
+                const targetData = targetingMultipliers[targeting];
+
+                // Calculate results
+                const reach = Math.floor(budget * platformData.reach * campaignData.reach * targetData.reach);
+                const engagement = Math.floor(reach * platformData.engagement * campaignData.engagement * targetData.engagement);
+                const leads = Math.floor(reach * platformData.leads * campaignData.leads * targetData.leads);
+                const roi = (platformData.roi * campaignData.roi * targetData.roi).toFixed(1);
+
+                // Update results
+                document.getElementById('resultReach').textContent = formatNumber(reach);
+                document.getElementById('resultEngagement').textContent = formatNumber(engagement);
+                document.getElementById('resultLeads').textContent = formatNumber(leads);
+                document.getElementById('resultROI').textContent = `${roi}x`;
+
+                // Update recommendations
+                const recommendations = document.getElementById('recommendations');
+                const platformNames = {
+                    'facebook': 'Facebook',
+                    'instagram': 'Instagram',
+                    'google': 'Google Ads',
+                    'tiktok': 'TikTok'
+                };
+
+                const campaignNames = {
+                    'awareness': 'brand awareness',
+                    'leads': 'lead generation',
+                    'sales': 'sales conversion'
+                };
+
+                recommendations.textContent = `For ${campaignNames[campaignType]} campaigns on ${platformNames[platform]}, focus on video content and post during peak hours (7-9 PM). Use specific targeting for better ROI.`;
+
+                // Reset button
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+
+                // Scroll to results
+                document.querySelector('.simulator-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 1500);
         }
 
-        // Format numbers with K/M suffixes
         function formatNumber(num) {
             if (num >= 1000000) {
                 return (num / 1000000).toFixed(1) + 'M';
@@ -1237,120 +665,6 @@
             }
             return num.toString();
         }
-
-        // Update performance chart
-        function updateChart(reach, engagement, leads, roi) {
-            const ctx = document.getElementById('performanceChart').getContext('2d');
-            
-            // Destroy existing chart if it exists
-            if (performanceChart) {
-                performanceChart.destroy();
-            }
-            
-            // Normalize values for chart
-            const maxVal = Math.max(reach, engagement, leads, roi * 10000);
-            const reachNorm = (reach / maxVal) * 100;
-            const engagementNorm = (engagement / maxVal) * 100;
-            const leadsNorm = (leads / maxVal) * 100;
-            const roiNorm = (roi * 10000 / maxVal) * 100;
-            
-            performanceChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Reach', 'Engagement', 'Leads', 'ROI Score'],
-                    datasets: [{
-                        label: 'Performance Score',
-                        data: [reachNorm, engagementNorm, leadsNorm, roiNorm],
-                        backgroundColor: [
-                            'rgba(138, 43, 226, 0.8)',
-                            'rgba(0, 122, 255, 0.8)',
-                            'rgba(0, 200, 83, 0.8)',
-                            'rgba(255, 59, 48, 0.8)'
-                        ],
-                        borderColor: [
-                            'rgb(138, 43, 226)',
-                            'rgb(0, 122, 255)',
-                            'rgb(0, 200, 83)',
-                            'rgb(255, 59, 48)'
-                        ],
-                        borderWidth: 2,
-                        borderRadius: 8
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    const label = context.label || '';
-                                    const value = context.raw || 0;
-                                    const actualValues = [reach, engagement, leads, `${roi}x`];
-                                    return `${label}: ${actualValues[context.dataIndex]} (${value.toFixed(1)}%)`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 100,
-                            ticks: {
-                                callback: function(value) {
-                                    return value + '%';
-                                }
-                            },
-                            grid: {
-                                color: 'rgba(0, 0, 0, 0.05)'
-                            }
-                        },
-                        x: {
-                            grid: {
-                                display: false
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        // Simulate button
-        document.getElementById('simulateBtn').addEventListener('click', function() {
-            // Add loading effect
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Simulating...';
-            this.disabled = true;
-            
-            // Simulate processing time
-            setTimeout(() => {
-                updateSimulation();
-                this.innerHTML = '<i class="fas fa-chart-line"></i> Simulate Campaign';
-                this.disabled = false;
-                
-                // Scroll to results
-                document.querySelector('.simulator-results').scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'start' 
-                });
-            }, 1000);
-        });
-
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', () => {
-            // Set active nav link
-            const currentPage = window.location.pathname.split('/').pop();
-            document.querySelectorAll('.nav-desktop a').forEach(link => {
-                if (link.getAttribute('href') === currentPage) {
-                    link.classList.add('active');
-                }
-            });
-            
-            // Initialize simulation
-            updateSimulation();
-        });
     </script>
 </body>
 </html>
