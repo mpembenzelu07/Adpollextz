@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Strategy Generator | Ad Pollex</title>
+    <title>AI Strategy Generator | Ad Pollex - 3D Marketing Visualization</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         :root {
             --primary: #000000;
             --accent: #FF3B30;
             --ai-blue: #00D4FF;
+            --ai-purple: #8A2BE2;
             --white: #FFFFFF;
             --gray: #8E8E93;
             --transition: all 0.3s ease;
@@ -27,6 +29,7 @@
             line-height: 1.6;
             color: #333;
             background: var(--white);
+            overflow-x: hidden;
         }
 
         /* HEADER & NAVIGATION */
@@ -137,6 +140,8 @@
             background: linear-gradient(135deg, #000428 0%, #004e92 100%);
             color: var(--white);
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
         .page-hero h1 {
@@ -147,6 +152,8 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            position: relative;
+            z-index: 2;
         }
 
         .page-hero p {
@@ -154,6 +161,23 @@
             color: rgba(255,255,255,0.9);
             max-width: 800px;
             margin: 0 auto 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 3D CONTAINER */
+        .three-d-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        #threeCanvas {
+            width: 100%;
+            height: 100%;
         }
 
         /* AI FORM SECTION */
@@ -163,7 +187,7 @@
         }
 
         .ai-container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -247,6 +271,49 @@
             box-shadow: 0 10px 20px rgba(0,212,255,0.3);
         }
 
+        /* 3D VISUALIZATION SECTION */
+        .visualization-section {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            height: 600px;
+        }
+
+        #funnel3d {
+            width: 100%;
+            height: 100%;
+        }
+
+        .visualization-controls {
+            position: absolute;
+            bottom: 1rem;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            z-index: 10;
+        }
+
+        .viz-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.8);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            transition: var(--transition);
+        }
+
+        .viz-btn:hover {
+            background: var(--ai-blue);
+            transform: translateY(-2px);
+        }
+
         /* AI PREVIEW */
         .ai-preview {
             background: var(--white);
@@ -297,49 +364,20 @@
             border-left: 4px solid var(--ai-blue);
         }
 
-        /* LOADING ANIMATION */
-        .ai-loading {
-            display: none;
-            text-align: center;
-            padding: 2rem;
+        /* 3D STATS VISUALIZATION */
+        .stats-3d-section {
+            margin-top: 3rem;
+            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
         }
 
-        .ai-loading.active {
-            display: block;
-        }
-
-        .loading-dots {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .loading-dots span {
-            width: 10px;
-            height: 10px;
-            background: var(--ai-blue);
-            border-radius: 50%;
-            animation: pulse 1.4s ease-in-out infinite;
-        }
-
-        .loading-dots span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .loading-dots span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(0.8);
-                opacity: 0.5;
-            }
+        #stats3d {
+            width: 100%;
+            height: 400px;
         }
 
         /* FOOTER */
@@ -382,6 +420,10 @@
             .ai-container {
                 grid-template-columns: 1fr;
             }
+            
+            .visualization-section {
+                height: 400px;
+            }
         }
     </style>
 </head>
@@ -409,9 +451,12 @@
     </header>
 
     <section class="page-hero">
+        <div class="three-d-container">
+            <canvas id="threeCanvas"></canvas>
+        </div>
         <div class="hero-content">
             <h1>AI Strategy Generator</h1>
-            <p>Generate your custom 30-day marketing plan in minutes. Our AI analyzes your business and creates a complete strategy.</p>
+            <p>Watch your marketing strategy come to life in 3D. Our AI creates interactive visualizations of your complete marketing funnel.</p>
         </div>
     </section>
 
@@ -462,92 +507,78 @@
                         <input type="text" class="form-control" id="targetAudience" placeholder="e.g., Young professionals aged 25-40" required>
                     </div>
                     
-                    <div class="form-group">
-                        <label class="form-label">Current Monthly Website Visitors</label>
-                        <select class="form-control" id="websiteTraffic">
-                            <option value="">Select traffic level</option>
-                            <option value="0-1000">0 - 1,000 visitors</option>
-                            <option value="1000-5000">1,000 - 5,000 visitors</option>
-                            <option value="5000-10000">5,000 - 10,000 visitors</option>
-                            <option value="10000+">10,000+ visitors</option>
-                        </select>
-                    </div>
-                    
                     <button type="button" class="btn-ai" onclick="generateStrategy()">
-                        <i class="fas fa-brain"></i> Generate AI Strategy
+                        <i class="fas fa-brain"></i> Generate 3D AI Strategy
                     </button>
                 </form>
             </div>
             
-            <div class="ai-preview">
-                <div class="ai-preview-header">
-                    <div class="ai-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <div>
-                        <h3 style="margin: 0; color: var(--ai-blue);">AI Strategy Preview</h3>
-                        <p style="margin: 0; color: var(--gray);">Your customized plan will appear here</p>
-                    </div>
-                </div>
-                
-                <!-- Loading Animation -->
-                <div class="ai-loading" id="aiLoading">
-                    <div class="ai-icon" style="margin: 0 auto 1rem;">
-                        <i class="fas fa-cog fa-spin"></i>
-                    </div>
-                    <h4 style="color: var(--ai-blue);">AI Generating Your Strategy</h4>
-                    <p style="color: var(--gray);">Analyzing your business data and creating customized recommendations...</p>
-                    <div class="loading-dots">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
-                
-                <!-- Results Container -->
-                <div id="aiResults">
-                    <div class="strategy-section">
-                        <h4 style="color: var(--ai-blue);"><i class="fas fa-calendar-alt"></i> 30-Day Content Calendar</h4>
-                        <div class="strategy-item">Week 1: Brand awareness campaign focusing on industry pain points</div>
-                        <div class="strategy-item">Week 2: Educational content series addressing audience needs</div>
-                        <div class="strategy-item">Week 3: Promotional campaign with special offers</div>
-                        <div class="strategy-item">Week 4: Customer testimonials and case studies</div>
-                    </div>
-                    
-                    <div class="strategy-section">
-                        <h4 style="color: var(--ai-blue);"><i class="fas fa-chart-pie"></i> Budget Allocation</h4>
-                        <div class="strategy-item">65% Social Media Advertising</div>
-                        <div class="strategy-item">25% Content Creation & SEO</div>
-                        <div class="strategy-item">10% Analytics & Optimization</div>
-                    </div>
-                    
-                    <div class="strategy-section">
-                        <h4 style="color: var(--ai-blue);"><i class="fas fa-bullseye"></i> Expected Results</h4>
-                        <div class="strategy-item">50,000 - 75,000 people reached in your target audience</div>
-                        <div class="strategy-item">5,000 - 10,000 engagements & interactions</div>
-                        <div class="strategy-item">500 - 1,000 qualified leads</div>
-                        <div class="strategy-item">3x - 5x return on ad spend</div>
-                    </div>
-                    
-                    <div class="strategy-section">
-                        <h4 style="color: var(--ai-blue);"><i class="fas fa-lightbulb"></i> AI Recommendations</h4>
-                        <div class="strategy-item">Focus on Instagram and Facebook for highest engagement</div>
-                        <div class="strategy-item">Post during peak hours: 7-9 PM for maximum visibility</div>
-                        <div class="strategy-item">Use video content for 3x higher engagement rates</div>
-                    </div>
-                    
-                    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid rgba(0,212,255,0.2);">
-                        <button class="btn-ai" onclick="downloadStrategy()">
-                            <i class="fas fa-download"></i> Download Full Strategy PDF
-                        </button>
-                        <p style="text-align: center; margin-top: 1rem; font-size: 0.875rem; color: var(--gray);">
-                            For implementation and expert guidance, <a href="contact.html" style="color: var(--ai-blue);">book a free consultation</a>
-                        </p>
-                    </div>
+            <div class="visualization-section">
+                <canvas id="funnel3d"></canvas>
+                <div class="visualization-controls">
+                    <button class="viz-btn" onclick="rotateFunnel()">
+                        <i class="fas fa-sync-alt"></i> Rotate
+                    </button>
+                    <button class="viz-btn" onclick="zoomIn()">
+                        <i class="fas fa-search-plus"></i> Zoom In
+                    </button>
+                    <button class="viz-btn" onclick="zoomOut()">
+                        <i class="fas fa-search-minus"></i> Zoom Out
+                    </button>
+                    <button class="viz-btn" onclick="resetView()">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="ai-container" style="margin-top: 3rem;">
+        <div class="ai-preview">
+            <div class="ai-preview-header">
+                <div class="ai-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div>
+                    <h3 style="margin: 0; color: var(--ai-blue);">AI Strategy Preview</h3>
+                    <p style="margin: 0; color: var(--gray);">Your customized plan will appear here</p>
+                </div>
+            </div>
+            
+            <div id="aiResults">
+                <div class="strategy-section">
+                    <h4 style="color: var(--ai-blue);"><i class="fas fa-calendar-alt"></i> 30-Day Content Calendar</h4>
+                    <div class="strategy-item">Week 1: Brand awareness campaign focusing on industry pain points</div>
+                    <div class="strategy-item">Week 2: Educational content series addressing audience needs</div>
+                    <div class="strategy-item">Week 3: Promotional campaign with special offers</div>
+                    <div class="strategy-item">Week 4: Customer testimonials and case studies</div>
+                </div>
+                
+                <div class="strategy-section">
+                    <h4 style="color: var(--ai-blue);"><i class="fas fa-chart-pie"></i> Budget Allocation</h4>
+                    <div class="strategy-item">65% Social Media Advertising</div>
+                    <div class="strategy-item">25% Content Creation & SEO</div>
+                    <div class="strategy-item">10% Analytics & Optimization</div>
+                </div>
+                
+                <div class="strategy-section">
+                    <h4 style="color: var(--ai-blue);"><i class="fas fa-bullseye"></i> Expected Results</h4>
+                    <div class="strategy-item">50,000 - 75,000 people reached in your target audience</div>
+                    <div class="strategy-item">5,000 - 10,000 engagements & interactions</div>
+                    <div class="strategy-item">500 - 1,000 qualified leads</div>
+                    <div class="strategy-item">3x - 5x return on ad spend</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-3d-section">
+            <h3 style="color: var(--ai-blue); margin-bottom: 1rem; text-align: center;">3D Performance Visualization</h3>
+            <canvas id="stats3d"></canvas>
+            <p style="text-align: center; margin-top: 1rem; color: rgba(255,255,255,0.8);">
+                Interactive 3D visualization of your campaign performance metrics
+            </p>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-container">
@@ -580,6 +611,298 @@
     </footer>
 
     <script>
+        // Initialize Three.js scene for hero background
+        let scene, camera, renderer, particles;
+        
+        function initHeroParticles() {
+            // Create scene
+            scene = new THREE.Scene();
+            
+            // Create camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+            
+            // Create renderer
+            const canvas = document.getElementById('threeCanvas');
+            renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 0);
+            
+            // Create particles
+            const particleCount = 1500;
+            const particlesGeometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+            
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                // Position
+                positions[i] = (Math.random() - 0.5) * 10;
+                positions[i + 1] = (Math.random() - 0.5) * 10;
+                positions[i + 2] = (Math.random() - 0.5) * 10;
+                
+                // Color (AI blue to purple gradient)
+                colors[i] = 0 + Math.random() * 0.5; // R
+                colors[i + 1] = 0.8 + Math.random() * 0.2; // G
+                colors[i + 2] = 1; // B
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.03,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.6
+            });
+            
+            particles = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particles);
+            
+            // Add ambient light
+            const ambientLight = new THREE.AmbientLight(0x404040);
+            scene.add(ambientLight);
+            
+            // Handle window resize
+            window.addEventListener('resize', onWindowResize);
+        }
+        
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        function animateHeroParticles() {
+            requestAnimationFrame(animateHeroParticles);
+            
+            // Rotate particles
+            particles.rotation.x += 0.001;
+            particles.rotation.y += 0.002;
+            
+            // Move particles in a flowing pattern
+            const positions = particles.geometry.attributes.position.array;
+            for (let i = 0; i < positions.length; i += 3) {
+                positions[i] += Math.sin(Date.now() * 0.001 + i) * 0.001;
+                positions[i + 1] += Math.cos(Date.now() * 0.001 + i) * 0.001;
+            }
+            particles.geometry.attributes.position.needsUpdate = true;
+            
+            renderer.render(scene, camera);
+        }
+        
+        // 3D Funnel Visualization
+        let funnelScene, funnelCamera, funnelRenderer, funnelMesh;
+        let isRotating = false;
+        let zoomLevel = 5;
+        
+        function init3DFunnel() {
+            const canvas = document.getElementById('funnel3d');
+            
+            // Create scene
+            funnelScene = new THREE.Scene();
+            funnelScene.background = new THREE.Color(0xf5f5f7);
+            
+            // Create camera
+            funnelCamera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+            funnelCamera.position.set(0, 0, zoomLevel);
+            
+            // Create renderer
+            funnelRenderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+            funnelRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+            funnelRenderer.setPixelRatio(window.devicePixelRatio);
+            
+            // Add lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            funnelScene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(1, 1, 1);
+            funnelScene.add(directionalLight);
+            
+            // Create funnel geometry
+            createFunnel();
+            
+            // Start animation
+            animateFunnel();
+            
+            // Handle resize
+            window.addEventListener('resize', onFunnelResize);
+        }
+        
+        function createFunnel() {
+            // Remove existing funnel
+            if (funnelMesh) {
+                funnelScene.remove(funnelMesh);
+            }
+            
+            // Create funnel geometry (conical shape)
+            const radiusTop = 0.5;
+            const radiusBottom = 2;
+            const height = 3;
+            const radialSegments = 32;
+            
+            const geometry = new THREE.ConeGeometry(radiusBottom, height, radialSegments, 1, true);
+            
+            // Create material with gradient colors
+            const material = new THREE.MeshPhongMaterial({
+                color: 0x00D4FF,
+                transparent: true,
+                opacity: 0.8,
+                side: THREE.DoubleSide
+            });
+            
+            // Create mesh
+            funnelMesh = new THREE.Mesh(geometry, material);
+            funnelMesh.position.y = -1;
+            funnelScene.add(funnelMesh);
+            
+            // Add funnel segments (different colors for each stage)
+            const stages = [
+                { color: 0xFF3B30, name: 'Awareness', height: 0.3 },
+                { color: 0xFF9500, name: 'Interest', height: 0.4 },
+                { color: 0xFFD700, name: 'Consideration', height: 0.5 },
+                { color: 0x4CD964, name: 'Conversion', height: 0.6 },
+                { color: 0x007AFF, name: 'Retention', height: 0.2 }
+            ];
+            
+            stages.forEach((stage, index) => {
+                const segmentGeometry = new THREE.CylinderGeometry(
+                    radiusBottom * (1 - (index * 0.15)),
+                    radiusBottom * (1 - ((index + 1) * 0.15)),
+                    stage.height,
+                    radialSegments
+                );
+                
+                const segmentMaterial = new THREE.MeshPhongMaterial({
+                    color: stage.color,
+                    transparent: true,
+                    opacity: 0.7
+                });
+                
+                const segment = new THREE.Mesh(segmentGeometry, segmentMaterial);
+                segment.position.y = -height/2 + (index * stage.height) + stage.height/2;
+                funnelScene.add(segment);
+            });
+        }
+        
+        function animateFunnel() {
+            requestAnimationFrame(animateFunnel);
+            
+            // Rotate funnel if enabled
+            if (isRotating && funnelMesh) {
+                funnelMesh.rotation.y += 0.01;
+            }
+            
+            funnelRenderer.render(funnelScene, funnelCamera);
+        }
+        
+        function onFunnelResize() {
+            const canvas = document.getElementById('funnel3d');
+            funnelCamera.aspect = canvas.clientWidth / canvas.clientHeight;
+            funnelCamera.updateProjectionMatrix();
+            funnelRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        }
+        
+        // Funnel control functions
+        function rotateFunnel() {
+            isRotating = !isRotating;
+            const btn = event.target.closest('.viz-btn');
+            if (isRotating) {
+                btn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+            } else {
+                btn.innerHTML = '<i class="fas fa-sync-alt"></i> Rotate';
+            }
+        }
+        
+        function zoomIn() {
+            if (zoomLevel > 2) {
+                zoomLevel -= 0.5;
+                funnelCamera.position.z = zoomLevel;
+            }
+        }
+        
+        function zoomOut() {
+            if (zoomLevel < 10) {
+                zoomLevel += 0.5;
+                funnelCamera.position.z = zoomLevel;
+            }
+        }
+        
+        function resetView() {
+            zoomLevel = 5;
+            funnelCamera.position.set(0, 0, zoomLevel);
+            funnelCamera.lookAt(0, 0, 0);
+            if (funnelMesh) {
+                funnelMesh.rotation.set(0, 0, 0);
+            }
+            isRotating = false;
+        }
+        
+        // 3D Stats Visualization
+        function init3DStats() {
+            const canvas = document.getElementById('stats3d');
+            
+            // Create scene
+            const statsScene = new THREE.Scene();
+            statsScene.background = new THREE.Color(0x000428);
+            
+            // Create camera
+            const statsCamera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+            statsCamera.position.set(0, 0, 8);
+            
+            // Create renderer
+            const statsRenderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+            statsRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+            
+            // Add lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            statsScene.add(ambientLight);
+            
+            const pointLight = new THREE.PointLight(0x00D4FF, 1);
+            pointLight.position.set(5, 5, 5);
+            statsScene.add(pointLight);
+            
+            // Create 3D bar chart
+            const data = [3, 5, 2, 4, 6]; // Sample data
+            const barWidth = 0.5;
+            const barSpacing = 1;
+            const maxHeight = 4;
+            
+            data.forEach((value, index) => {
+                const height = (value / Math.max(...data)) * maxHeight;
+                const geometry = new THREE.BoxGeometry(barWidth, height, barWidth);
+                const material = new THREE.MeshPhongMaterial({ 
+                    color: new THREE.Color(`hsl(${index * 60}, 100%, 50%)`),
+                    transparent: true,
+                    opacity: 0.8
+                });
+                
+                const bar = new THREE.Mesh(geometry, material);
+                bar.position.x = (index - (data.length - 1) / 2) * barSpacing;
+                bar.position.y = height / 2;
+                
+                statsScene.add(bar);
+            });
+            
+            // Animate
+            function animateStats() {
+                requestAnimationFrame(animateStats);
+                statsScene.rotation.y += 0.005;
+                statsRenderer.render(statsScene, statsCamera);
+            }
+            
+            animateStats();
+            
+            // Handle resize
+            window.addEventListener('resize', () => {
+                statsCamera.aspect = canvas.clientWidth / canvas.clientHeight;
+                statsCamera.updateProjectionMatrix();
+                statsRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+            });
+        }
+        
+        // Form functionality
         document.addEventListener('DOMContentLoaded', function() {
             const currentPage = window.location.pathname.split('/').pop();
             const navLinks = document.querySelectorAll('.nav-desktop a');
@@ -598,6 +921,12 @@
                 const value = parseInt(this.value);
                 budgetValue.textContent = `$${value.toLocaleString()}`;
             });
+
+            // Initialize 3D visualizations
+            initHeroParticles();
+            animateHeroParticles();
+            init3DFunnel();
+            init3DStats();
         });
 
         function generateStrategy() {
@@ -607,7 +936,6 @@
             const budget = parseInt(document.getElementById('budgetSlider').value);
             const goal = document.getElementById('primaryGoal').value;
             const audience = document.getElementById('targetAudience').value;
-            const traffic = document.getElementById('websiteTraffic').value;
 
             // Validate required fields
             if (!businessName || !industry || !goal || !audience) {
@@ -615,122 +943,43 @@
                 return;
             }
 
-            // Show loading animation
-            const loadingElement = document.getElementById('aiLoading');
-            const resultsElement = document.getElementById('aiResults');
-            const generateButton = document.querySelector('.btn-ai');
+            // Update funnel based on inputs
+            updateFunnelVisualization(industry, budget, goal);
             
-            loadingElement.classList.add('active');
-            resultsElement.style.opacity = '0.5';
-            generateButton.disabled = true;
-            generateButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+            // Show success message
+            alert(`✅ 3D AI Strategy Generated!\n\nYour marketing funnel visualization has been created for "${businessName}".\n\nExplore the interactive 3D model above!`);
+            
+            // Scroll to visualization
+            document.querySelector('.visualization-section').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }
 
-            // Map industry names
-            const industryNames = {
-                'ecommerce': 'E-commerce & Retail',
-                'restaurant': 'Restaurant & Food Service',
-                'technology': 'Technology & SaaS',
-                'realestate': 'Real Estate',
-                'health': 'Health & Wellness',
-                'education': 'Education & Training',
-                'tourism': 'Tourism & Hospitality',
-                'other': 'your industry'
+        function updateFunnelVisualization(industry, budget, goal) {
+            // Change funnel colors based on industry
+            const industryColors = {
+                'ecommerce': 0xFF3B30,     // Red
+                'restaurant': 0x4CD964,    // Green
+                'technology': 0x007AFF,    // Blue
+                'realestate': 0xFF9500,    // Orange
+                'health': 0x5856D6,        // Purple
+                'education': 0xFF2D55,     // Pink
+                'tourism': 0x34C759,       // Light Green
+                'other': 0x00D4FF          // AI Blue
             };
-
-            // Map goal names
-            const goalNames = {
-                'awareness': 'brand awareness',
-                'leads': 'lead generation',
-                'sales': 'sales increase',
-                'engagement': 'customer engagement',
-                'traffic': 'website traffic'
-            };
-
-            // Calculate results based on inputs
+            
+            // Update funnel color
+            if (funnelMesh && funnelMesh.material) {
+                funnelMesh.material.color.setHex(industryColors[industry] || 0x00D4FF);
+            }
+            
+            // Start rotation for visual effect
+            isRotating = true;
             setTimeout(() => {
-                // Update content calendar
-                const week1 = document.querySelectorAll('.strategy-item')[0];
-                const week2 = document.querySelectorAll('.strategy-item')[1];
-                const week3 = document.querySelectorAll('.strategy-item')[2];
-                const week4 = document.querySelectorAll('.strategy-item')[3];
-                
-                if (week1 && week2 && week3 && week4) {
-                    week1.textContent = `Week 1: ${industryNames[industry]} brand awareness campaign`;
-                    week2.textContent = `Week 2: Educational content for ${audience}`;
-                    week3.textContent = `Week 3: Promotional campaign for ${goalNames[goal]}`;
-                    week4.textContent = `Week 4: Customer success stories showcasing ${industryNames[industry]} results`;
-                }
-
-                // Update budget allocation based on budget
-                const budgetItems = document.querySelectorAll('.strategy-section:nth-child(2) .strategy-item');
-                if (budgetItems.length >= 3) {
-                    const socialPercent = Math.min(70, 40 + (budget/1000)*5);
-                    const contentPercent = Math.floor((100 - socialPercent) * 0.7);
-                    const analyticsPercent = 100 - socialPercent - contentPercent;
-                    
-                    budgetItems[0].textContent = `${socialPercent}% Social Media Advertising`;
-                    budgetItems[1].textContent = `${contentPercent}% Content Creation & SEO`;
-                    budgetItems[2].textContent = `${analyticsPercent}% Analytics & Optimization`;
-                }
-
-                // Update expected results
-                const reach = Math.floor(budget * 25);
-                const engagement = Math.floor(reach * 0.1);
-                const leads = Math.floor(reach * 0.01);
-                const roiMin = Math.min(5, 2 + (budget/2000));
-                const roiMax = Math.min(8, 4 + (budget/2000));
-                
-                const resultItems = document.querySelectorAll('.strategy-section:nth-child(3) .strategy-item');
-                if (resultItems.length >= 4) {
-                    resultItems[0].textContent = `${reach.toLocaleString()} - ${Math.floor(reach*1.5).toLocaleString()} people reached`;
-                    resultItems[1].textContent = `${engagement.toLocaleString()} - ${Math.floor(engagement*2).toLocaleString()} engagements`;
-                    resultItems[2].textContent = `${leads.toLocaleString()} - ${Math.floor(leads*2).toLocaleString()} qualified leads`;
-                    resultItems[3].textContent = `${roiMin.toFixed(1)}x - ${roiMax.toFixed(1)}x return on ad spend`;
-                }
-
-                // Update recommendations
-                const recommendationItems = document.querySelectorAll('.strategy-section:nth-child(4) .strategy-item');
-                if (recommendationItems.length >= 3) {
-                    recommendationItems[0].textContent = `Focus on Instagram and Facebook for engaging ${audience}`;
-                    recommendationItems[1].textContent = `Post during peak hours: 7-9 PM for maximum visibility`;
-                    recommendationItems[2].textContent = `Use video content for 3x higher engagement with ${audience}`;
-                }
-
-                // Update preview header
-                const previewHeader = document.querySelector('.ai-preview-header h3');
-                if (previewHeader) {
-                    previewHeader.textContent = `AI Strategy for ${businessName}`;
-                }
-
-                // Hide loading, show results
-                loadingElement.classList.remove('active');
-                resultsElement.style.opacity = '1';
-                generateButton.disabled = false;
-                generateButton.innerHTML = '<i class="fas fa-brain"></i> Generate AI Strategy';
-
-                // Scroll to results
-                resultsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-                // Show success message
-                alert(`✅ AI Strategy Generated Successfully!\n\nYour customized marketing plan for "${businessName}" is ready. The strategy includes:\n\n• 30-Day Content Calendar\n• Budget Allocation\n• Expected Results\n• AI Recommendations\n\nYou can now download the full strategy PDF.`);
-                
-            }, 2500); // 2.5 second delay for realistic AI simulation
+                isRotating = false;
+            }, 3000);
         }
-
-        function downloadStrategy() {
-            const businessName = document.getElementById('businessName').value || 'Your Business';
-            
-            alert(`📥 Downloading AI Strategy PDF for ${businessName}...\n\n(Note: This is a demo. In a real implementation, this would generate and download a PDF file.)\n\nYour strategy has been sent to: adpollex@gmail.com\n\nFor a personalized consultation, please contact us.`);
-            
-            // In a real implementation, this would generate and trigger a PDF download
-            // For demo purposes, we'll just show an alert
-        }
-
-        // Form validation
-        document.getElementById('strategyForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent actual form submission
-            generateStrategy();
-        });
     </script>
 </body>
 </html>
