@@ -90,10 +90,10 @@
             text-transform: uppercase;
         }
 
-        /* NAVIGATION TABS/LINKS */
+        /* NAVIGATION TABS */
         .nav-desktop {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             align-items: center;
         }
 
@@ -130,7 +130,7 @@
             transform: translateY(-2px);
         }
 
-        /* HERO SECTION */
+        /* HERO */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -191,10 +191,6 @@
         .btn-secondary {
             background: transparent;
             border: 2px solid rgba(255,255,255,0.3);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.1);
         }
 
         /* FEATURES */
@@ -282,7 +278,6 @@
     </style>
 </head>
 <body>
-    <!-- HEADER WITH NAVIGATION TABS -->
     <header>
         <div class="header-container">
             <a href="index.html" class="logo">
@@ -293,7 +288,6 @@
                 </div>
             </a>
             
-            <!-- NAVIGATION TABS - CLICK THESE TO GO TO OTHER PAGES -->
             <nav class="nav-desktop">
                 <a href="index.html" class="active">Home</a>
                 <a href="services.html">Services</a>
@@ -306,7 +300,6 @@
         </div>
     </header>
 
-    <!-- HERO SECTION -->
     <section class="hero">
         <div class="hero-content">
             <h1>AI-Powered Digital Marketing Excellence</h1>
@@ -323,7 +316,6 @@
         </div>
     </section>
 
-    <!-- FEATURES -->
     <section class="features">
         <div class="features-grid">
             <div class="feature-card">
@@ -361,7 +353,6 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div class="footer-container">
             <div>
@@ -393,7 +384,6 @@
     </footer>
 
     <script>
-        // Simple script to highlight active nav link
         document.addEventListener('DOMContentLoaded', function() {
             const currentPage = window.location.pathname.split('/').pop();
             const navLinks = document.querySelectorAll('.nav-desktop a');
@@ -401,8 +391,6 @@
             navLinks.forEach(link => {
                 if (link.getAttribute('href') === currentPage) {
                     link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
                 }
             });
         });
