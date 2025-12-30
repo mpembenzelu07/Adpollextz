@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard | Ad Pollex</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #FF3B30;
+            --dashboard-green: #10B981;
+            --white: #FFFFFF;
+            --gray: #8E8E93;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: var(--white);
+        }
+
+        /* HEADER & NAVIGATION */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-symbol {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-main {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+
+        .logo-sub {
+            font-size: 0.7rem;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* NAVIGATION TABS */
+        .nav-desktop {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-desktop a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-desktop a:hover {
+            background: rgba(255, 59, 48, 0.1);
+            color: var(--accent);
+        }
+
+        .nav-desktop a.active {
+            background: var(--dashboard-green);
+            color: var(--white);
+        }
+
+        .nav-desktop a.btn-primary {
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+        }
+
+        .nav-desktop a.btn-primary:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+        }
+
+        /* DASHBOARD HERO */
+        .dashboard-hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, var(--dashboard-green) 0%, #059669 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .dashboard-hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .dashboard-hero p {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* DASHBOARD CONTENT */
+        .dashboard-section {
+            padding: 4rem 2rem;
+            background: #f5f5f7;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .dashboard-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .dashboard-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .dashboard-tab:hover {
+            color: var(--dashboard-green);
+            background: rgba(16,185,129,0.1);
+        }
+
+        .dashboard-tab.active {
+            color: var(--dashboard-green);
+            border-bottom: 3px solid var(--dashboard-green);
+            background: rgba(16,185,129,0.1);
+        }
+
+        .dashboard-content {
+            padding: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid var(--dashboard-green);
+        }
+
+        .stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dashboard-green);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-top: 0.25rem;
+        }
+
+        .campaign-list {
+            margin-top: 2rem;
+        }
+
+        .campaign-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+            transition: var(--transition);
+        }
+
+        .campaign-item:hover {
+            background: #f8f9fa;
+        }
+
+        .campaign-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: rgba(16,185,129,0.1);
+            color: var(--dashboard-green);
+        }
+
+        .status-pending {
+            background: rgba(255,193,7,0.1);
+            color: #ffc107;
+        }
+
+        .status-completed {
+            background: rgba(108,117,125,0.1);
+            color: #6c757d;
+        }
+
+        /* LOGIN FORM */
+        .login-form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--dashboard-green);
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: var(--dashboard-green);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn:hover {
+            background: #059669;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(16,185,129,0.3);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-desktop {
+                display: none;
+            }
+            
+            .dashboard-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .dashboard-tabs {
+                flex-direction: column;
+            }
+            
+            .dashboard-tab {
+                border-bottom: 1px solid #e0e0e0;
+                border-left: 3px solid transparent;
+                border-bottom: none;
+            }
+            
+            .dashboard-tab.active {
+                border-left: 3px solid var(--dashboard-green);
+                border-bottom: none;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-symbol">AP</div>
+                <div class="logo-text">
+                    <div class="logo-main">Ad Pollex</div>
+                    <div class="logo-sub">AI Marketing</div>
+                </div>
+            </a>
+            
+            <nav class="nav-desktop">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="ai-strategy.html">AI Strategy</a>
+                <a href="simulator.html">Simulator</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="contact.html">Contact</a>
+                <a href="dashboard.html" class="active">Client Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="dashboard-hero">
+        <div class="hero-content">
+            <h1>Client Dashboard</h1>
+            <p>Access your campaign analytics, reports, and performance data in real-time.</p>
+        </div>
+    </section>
+
+    <section class="dashboard-section">
+        <div class="login-form" id="loginForm">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--dashboard-green);">Client Login</h2>
+            
+            <form id="clientLoginForm">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-control" placeholder="client@yourcompany.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                
+                <button type="button" class="btn" onclick="login()">
+                    <i class="fas fa-sign-in-alt"></i> Login to Dashboard
+                </button>
+            </form>
+            
+            <p style="text-align: center; margin-top: 1.5rem; color: var(--gray);">
+                Demo Login: Use "demo@adpollex.com" and any password
+            </p>
+        </div>
+
+        <div class="dashboard-container" id="dashboardContent" style="display: none;">
+            <div class="dashboard-tabs">
+                <button class="dashboard-tab active" onclick="showTab('overview')">
+                    <i class="fas fa-chart-bar"></i> Overview
+                </button>
+                <button class="dashboard-tab" onclick="showTab('campaigns')">
+                    <i class="fas fa-rocket"></i> Campaigns
+                </button>
+                <button class="dashboard-tab" onclick="showTab('analytics')">
+                    <i class="fas fa-chart-line"></i> Analytics
+                </button>
+                <button class="dashboard-tab" onclick="showTab('reports')">
+                    <i class="fas fa-file-alt"></i> Reports
+                </button>
+            </div>
+            
+            <div class="dashboard-content">
+                <div id="overviewTab">
+                    <h2 style="color: var(--dashboard-green); margin-bottom: 1.5rem;">Dashboard Overview</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">$25,480</div>
+                            <div class="stat-label">Monthly Ad Spend</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">3.8x</div>
+                            <div class="stat-label">Average ROI</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">1,254</div>
+                            <div class="stat-label">Leads This Month</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">98%</div>
+                            <div class="stat-label">Campaign Performance</div>
+                        </div>
+                    </div>
+                    
+                    <div class="campaign-list">
+                        <h3 style="margin-bottom: 1rem;">Active Campaigns</h3>
+                        <div class="campaign-item">
+                            <div>
+                                <h4 style="margin-bottom: 0.25rem;">Q4 Brand Awareness</h4>
+                                <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Facebook & Instagram</p>
+                            </div>
+                            <div class="campaign-status status-active">Active</div>
+                        </div>
+                        <div class="campaign-item">
+                            <div>
+                                <h4 style="margin-bottom: 0.25rem;">Holiday Sales Push</h4>
+                                <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Google Ads</p>
+                            </div>
+                            <div class="campaign-status status-active">Active</div>
+                        </div>
+                        <div class="campaign-item">
+                            <div>
+                                <h4 style="margin-bottom: 0.25rem;">Email Newsletter</h4>
+                                <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Email Marketing</p>
+                            </div>
+                            <div class="campaign-status status-pending">Pending Review</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="campaignsTab" style="display: none;">
+                    <h2 style="color: var(--dashboard-green); margin-bottom: 1.5rem;">Campaign Management</h2>
+                    <p style="color: var(--gray); margin-bottom: 2rem;">Manage and monitor all your active marketing campaigns.</p>
+                    <!-- Campaign content would go here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div>
+                <a href="index.html" class="logo" style="margin-bottom: 1.5rem;">
+                    <div class="logo-symbol">AP</div>
+                    <div class="logo-text">
+                        <div class="logo-main" style="color: white;">Ad Pollex</div>
+                    </div>
+                </a>
+                <p style="color: rgba(255,255,255,0.7);">AI-powered digital marketing agency since 2016.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4 style="margin-bottom: 1rem;">Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="ai-strategy.html">AI Strategy</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4 style="margin-bottom: 1rem;">Contact</h4>
+                <a href="tel:+255684320325">+255 684 320 325</a>
+                <a href="mailto:adpollex@gmail.com">adpollex@gmail.com</a>
+                <p style="color: rgba(255,255,255,0.7); margin-top: 0.5rem;">Dar es Salaam, Tanzania</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-desktop a');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        function login() {
+            const email = document.querySelector('input[type="email"]').value;
+            
+            // Demo login - accepts any email and password
+            if (email) {
+                // Hide login form
+                document.getElementById('loginForm').style.display = 'none';
+                
+                // Show dashboard
+                document.getElementById('dashboardContent').style.display = 'block';
+                
+                // Scroll to dashboard
+                document.getElementById('dashboardContent').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function showTab(tabName) {
+            // Hide all tabs
+            const tabs = ['overviewTab', 'campaignsTab', 'analyticsTab', 'reportsTab'];
+            tabs.forEach(tab => {
+                const element = document.getElementById(tab);
+                if (element) {
+                    element.style.display = 'none';
+                }
+            });
+            
+            // Show selected tab
+            const selectedTab = document.getElementById(tabName + 'Tab');
+            if (selectedTab) {
+                selectedTab.style.display = 'block';
+            }
+            
+            // Update tab buttons
+            const tabButtons = document.querySelectorAll('.dashboard-tab');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Find and activate the clicked tab button
+            tabButtons.forEach(button => {
+                if (button.textContent.toLowerCase().includes(tabName)) {
+                    button.classList.add('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
