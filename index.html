@@ -9,14 +9,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== ULTRA PREMIUM DESIGN SYSTEM ===== */
+        /* ===== MAIN STYLES ===== */
         :root {
             --primary: #000000;
             --primary-light: #1a1a1a;
             --accent: #FF3B30;
             --accent-dark: #CC0000;
             --secondary: #007AFF;
-            --gold: #FFD700;
+            --ai-blue: #00D4FF;
             --white: #FFFFFF;
             --off-white: #F5F5F7;
             --gray: #8E8E93;
@@ -39,20 +39,17 @@
 
         html {
             scroll-behavior: smooth;
-            font-size: 16px;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.7;
             color: var(--dark-gray);
             background: var(--white);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* ===== TYPOGRAPHY ===== */
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 700;
@@ -62,26 +59,19 @@
         }
 
         h1 {
-            font-size: 4.5rem;
+            font-size: 4rem;
             font-weight: 800;
             letter-spacing: -0.03em;
         }
 
         h2 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             color: var(--primary);
         }
 
         h3 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--primary);
-        }
-
-        .display {
-            font-size: 5.5rem;
-            font-weight: 900;
-            line-height: 1;
-            letter-spacing: -0.04em;
         }
 
         p {
@@ -117,67 +107,6 @@
             position: relative;
             overflow: hidden;
             padding: 6rem 0;
-        }
-
-        /* ===== BUTTONS ===== */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.25rem 2.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: var(--radius-xl);
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-            position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: var(--white);
-            box-shadow: 0 10px 30px rgba(255, 59, 48, 0.3);
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-dark);
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(255, 59, 48, 0.4);
-        }
-
-        .btn-secondary {
-            background: rgba(0, 0, 0, 0.8);
-            color: var(--white);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(0, 0, 0, 0.9);
-            transform: translateY(-5px);
-            border-color: var(--accent);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .btn-outline:hover {
-            background: var(--primary);
-            color: var(--white);
-            transform: translateY(-5px);
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 2rem;
         }
 
         /* ===== HEADER ===== */
@@ -225,8 +154,6 @@
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 900;
             font-size: 1.5rem;
-            position: relative;
-            overflow: hidden;
         }
 
         .logo-text {
@@ -289,33 +216,73 @@
             width: 100%;
         }
 
-        .mobile-menu-btn {
-            display: none;
-            width: 48px;
-            height: 48px;
-            background: var(--primary);
-            border: none;
-            border-radius: 12px;
-            color: var(--white);
-            font-size: 1.25rem;
-            cursor: pointer;
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: var(--radius-xl);
             transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        .mobile-menu-btn:hover {
+        .btn-primary {
             background: var(--accent);
-            transform: rotate(90deg);
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(255, 59, 48, 0.3);
         }
 
-        /* ===== HERO SECTION ===== */
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 59, 48, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .btn-ai {
+            background: linear-gradient(135deg, var(--ai-blue), var(--secondary));
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-ai:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* ===== HERO ===== */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            position: relative;
             background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
             color: var(--white);
             padding-top: 6rem;
+            position: relative;
             overflow: hidden;
         }
 
@@ -338,9 +305,9 @@
         }
 
         .hero h1 {
-            font-size: 5.5rem;
+            font-size: 5rem;
             margin-bottom: 2rem;
-            background: linear-gradient(135deg, var(--white), var(--gold));
+            background: linear-gradient(135deg, var(--white), var(--ai-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -388,8 +355,8 @@
             font-size: 1.5rem;
         }
 
-        /* ===== AI PREVIEW SECTION ===== */
-        .ai-preview {
+        /* ===== AI FEATURES ===== */
+        .ai-features {
             background: var(--off-white);
         }
 
@@ -398,13 +365,13 @@
             margin-bottom: 4rem;
         }
 
-        .ai-features {
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 3rem;
         }
 
-        .ai-feature {
+        .feature-item {
             background: var(--white);
             border-radius: var(--radius-lg);
             padding: 3rem;
@@ -414,20 +381,20 @@
             overflow: hidden;
         }
 
-        .ai-feature:hover {
+        .feature-item:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow-lg);
             border-color: transparent;
         }
 
-        .ai-feature::before {
+        .feature-item::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            background: linear-gradient(90deg, var(--accent), var(--ai-blue));
         }
 
         .feature-badge {
@@ -444,7 +411,7 @@
             letter-spacing: 0.05em;
         }
 
-        /* ===== CLIENTS SECTION ===== */
+        /* ===== CLIENTS ===== */
         .clients {
             background: var(--white);
         }
@@ -470,69 +437,55 @@
             transform: translateY(-5px);
         }
 
-        /* ===== TESTIMONIALS ===== */
-        .testimonials {
-            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        /* ===== STATS ===== */
+        .stats {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            text-align: center;
+        }
+
+        .stats h2 {
             color: var(--white);
         }
 
-        .testimonials h2 {
-            color: var(--white);
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
         }
 
-        .testimonials .lead {
+        .stat-card {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--ai-blue);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.125rem;
             color: rgba(255, 255, 255, 0.9);
         }
 
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .testimonial-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-lg);
-            padding: 2.5rem;
-            transition: var(--transition);
-        }
-
-        .testimonial-card:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-5px);
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-
-        .author-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* ===== CTA SECTION ===== */
+        /* ===== CTA ===== */
         .cta {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             color: var(--white);
             text-align: center;
         }
 
         .cta h2 {
             color: var(--white);
+        }
+
+        .cta .lead {
+            color: rgba(255, 255, 255, 0.9);
         }
 
         /* ===== FOOTER ===== */
@@ -636,16 +589,10 @@
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1200px) {
             h1 {
-                font-size: 4rem;
-            }
-            h2 {
-                font-size: 3rem;
-            }
-            .display {
-                font-size: 4.5rem;
+                font-size: 3.5rem;
             }
             .hero h1 {
-                font-size: 4.5rem;
+                font-size: 4rem;
             }
         }
 
@@ -653,12 +600,10 @@
             .nav-desktop {
                 display: none;
             }
-            .mobile-menu-btn {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
             .hero-features {
+                grid-template-columns: 1fr;
+            }
+            .features-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -668,50 +613,26 @@
                 padding: 0 1.5rem;
             }
             h1 {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
             h2 {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
             .hero h1 {
                 font-size: 3rem;
             }
+            section {
+                padding: 4rem 0;
+            }
             .btn-group {
                 flex-direction: column;
-                align-items: stretch;
             }
             .btn {
                 width: 100%;
             }
-        }
-
-        /* ===== ANIMATIONS ===== */
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(60px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-slide-up {
-            animation: slideInUp 1s ease-out forwards;
-        }
-
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
         }
     </style>
 </head>
@@ -737,110 +658,103 @@
                 <a href="contact.html">Contact</a>
                 <a href="dashboard.html" class="btn btn-primary">Client Login</a>
             </nav>
-            
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="hero-content animate-slide-up">
-                <div class="eyebrow">AI-Powered Marketing Agency</div>
-                <h1>Where Artificial Intelligence Meets <span class="display">Marketing Brilliance</span></h1>
-                <p class="lead">Ad Pollex transforms businesses through data-driven digital marketing enhanced by cutting-edge AI technology. Based in Dar es Salaam, we craft campaigns that predict, adapt, and deliver extraordinary results.</p>
+            <div class="hero-content">
+                <div class="eyebrow" style="color: var(--ai-blue);">AI-Powered Digital Marketing</div>
+                <h1>Where Strategy Meets <span style="display: block; color: var(--ai-blue);">Artificial Intelligence</span></h1>
+                <p class="lead">Ad Pollex transforms businesses through cutting-edge AI technology combined with proven marketing strategies. Based in Dar es Salaam, we deliver measurable results that drive growth.</p>
                 
                 <div class="btn-group">
-                    <a href="ai-strategy.html" class="btn btn-primary">
-                        <i class="fas fa-robot"></i> Generate AI Strategy →
+                    <a href="ai-strategy.html" class="btn btn-ai">
+                        <i class="fas fa-robot"></i> Generate AI Strategy
                     </a>
-                    <a href="simulator.html" class="btn btn-secondary">
-                        <i class="fas fa-chart-line"></i> Campaign Simulator
+                    <a href="contact.html" class="btn btn-secondary">
+                        <i class="fas fa-calendar"></i> Book Free Consultation
                     </a>
                 </div>
                 
                 <div class="hero-features">
-                    <div class="feature-card animate-slide-up">
+                    <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-brain"></i>
                         </div>
-                        <h4>AI Strategy Generator</h4>
-                        <p>30-day marketing plan in minutes</p>
+                        <h4 style="color: white;">AI Strategy Generator</h4>
+                        <p style="color: rgba(255,255,255,0.8);">Complete marketing plan in minutes</p>
                     </div>
-                    <div class="feature-card animate-slide-up animate-delay-1">
+                    <div class="feature-card">
                         <div class="feature-icon">
-                            <i class="fas fa-chart-bar"></i>
+                            <i class="fas fa-chart-line"></i>
                         </div>
-                        <h4>Live Simulator</h4>
-                        <p>Predict campaign results before investing</p>
+                        <h4 style="color: white;">Campaign Simulator</h4>
+                        <p style="color: rgba(255,255,255,0.8);">Predict results before investing</p>
                     </div>
-                    <div class="feature-card animate-slide-up animate-delay-2">
+                    <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-shield-alt"></i>
                         </div>
-                        <h4>Real-Time Dashboard</h4>
-                        <p>Monitor performance 24/7</p>
+                        <h4 style="color: white;">Real-Time Analytics</h4>
+                        <p style="color: rgba(255,255,255,0.8);">24/7 performance monitoring</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- AI Features Preview -->
-    <section class="ai-preview">
+    <!-- AI Features -->
+    <section class="ai-features">
         <div class="container">
             <div class="section-header">
-                <div class="eyebrow">AI-Powered Features</div>
-                <h2>Next-Generation <span style="color: var(--accent);">Marketing Tools</span></h2>
-                <p class="lead">We've built proprietary AI technology to give your campaigns an unfair advantage.</p>
+                <div class="eyebrow">Advanced AI Technology</div>
+                <h2>Next-Generation <span style="color: var(--ai-blue);">Marketing Solutions</span></h2>
+                <p class="lead">Our proprietary AI technology gives your campaigns an unfair advantage in the digital marketplace.</p>
             </div>
             
-            <div class="ai-features">
-                <div class="ai-feature animate-slide-up">
-                    <div class="feature-badge">New</div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-badge">Most Popular</div>
                     <h3>AI Strategy Generator</h3>
-                    <p>Input your business details and get a complete 30-day marketing strategy with content calendar, budget allocation, and expected ROI.</p>
+                    <p>Input your business details and get a complete 30-day marketing strategy with content calendar, budget allocation, and predicted ROI.</p>
                     <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: var(--gray);">
                         <li style="margin-bottom: 0.5rem;">Customized content plan</li>
                         <li style="margin-bottom: 0.5rem;">Platform-specific strategies</li>
-                        <li style="margin-bottom: 0.5rem;">Budget optimization</li>
-                        <li>Performance predictions</li>
+                        <li>Budget optimization</li>
                     </ul>
-                    <a href="ai-strategy.html" class="btn btn-outline">Try AI Generator →</a>
+                    <a href="ai-strategy.html" class="btn btn-primary" style="margin-top: 1rem;">Try AI Generator →</a>
                 </div>
                 
-                <div class="ai-feature animate-slide-up">
+                <div class="feature-item">
                     <div class="feature-badge">Interactive</div>
                     <h3>Campaign Performance Simulator</h3>
                     <p>Adjust budget, platform, and targeting to see predicted reach, engagement, and ROI before spending a single shilling.</p>
                     <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: var(--gray);">
                         <li style="margin-bottom: 0.5rem;">Real-time ROI calculations</li>
                         <li style="margin-bottom: 0.5rem;">Multi-platform comparison</li>
-                        <li style="margin-bottom: 0.5rem;">Audience reach predictions</li>
                         <li>Conversion rate forecasting</li>
                     </ul>
-                    <a href="simulator.html" class="btn btn-outline">Launch Simulator →</a>
+                    <a href="simulator.html" class="btn btn-primary" style="margin-top: 1rem;">Launch Simulator →</a>
                 </div>
                 
-                <div class="ai-feature animate-slide-up">
+                <div class="feature-item">
                     <div class="feature-badge">Advanced</div>
                     <h3>AI Lead Qualifier</h3>
                     <p>Our intelligent system analyzes incoming leads in real-time, classifying them as hot, warm, or cold and routing them appropriately.</p>
                     <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: var(--gray);">
                         <li style="margin-bottom: 0.5rem;">Voice & text input</li>
                         <li style="margin-bottom: 0.5rem;">Intent detection</li>
-                        <li style="margin-bottom: 0.5rem;">Automatic routing</li>
                         <li>Priority scoring</li>
                     </ul>
-                    <a href="contact.html" class="btn btn-outline">Qualify Your Leads →</a>
+                    <a href="contact.html" class="btn btn-primary" style="margin-top: 1rem;">Qualify Your Leads →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Trusted Clients -->
+    <!-- Clients -->
     <section class="clients">
         <div class="container">
             <div class="section-header">
@@ -858,53 +772,44 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="testimonials">
+    <!-- Stats -->
+    <section class="stats">
         <div class="container">
             <div class="section-header">
-                <div class="eyebrow" style="color: var(--gold);">Success Stories</div>
-                <h2>What Our <span style="color: var(--gold);">Clients Say</span></h2>
+                <h2>Proven Results, <span style="color: var(--ai-blue);">Measurable Impact</span></h2>
+                <p class="lead">Our AI-powered approach delivers exceptional outcomes for businesses across Tanzania.</p>
             </div>
             
-            <div class="testimonial-grid">
-                <div class="testimonial-card animate-slide-up">
-                    <p>"The AI Strategy Generator gave us a complete marketing plan in 10 minutes that would have taken weeks to create manually. Our sales increased by 200% in the first quarter."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="James Mwinyi">
-                        </div>
-                        <div>
-                            <h4 style="color: white; margin-bottom: 0.25rem;">James Mwinyi</h4>
-                            <p style="color: rgba(255,255,255,0.7); margin: 0;">CEO, Tech Solutions Ltd</p>
-                        </div>
-                    </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" data-count="150">150+</div>
+                    <div class="stat-label">Successful Campaigns</div>
                 </div>
-                
-                <div class="testimonial-card animate-slide-up">
-                    <p>"The campaign simulator helped us allocate our budget perfectly. We saved 40% on ad spend while increasing conversions by 150%. This is game-changing technology."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Sarah Juma">
-                        </div>
-                        <div>
-                            <h4 style="color: white; margin-bottom: 0.25rem;">Sarah Juma</h4>
-                            <p style="color: rgba(255,255,255,0.7); margin: 0;">Marketing Director, Fashion House</p>
-                        </div>
-                    </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="98">98%</div>
+                    <div class="stat-label">Client Retention Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="40">40+</div>
+                    <div class="stat-label">Industry Experts</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="7">7+</div>
+                    <div class="stat-label">Years of Excellence</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
+    <!-- CTA -->
     <section class="cta">
         <div class="container">
             <div class="section-header">
-                <h2>Ready to Transform Your Marketing?</h2>
+                <h2>Ready to Transform Your <span style="color: var(--white);">Marketing?</span></h2>
                 <p class="lead">Experience the future of digital marketing with Ad Pollex's AI-powered solutions.</p>
                 
                 <div class="btn-group" style="justify-content: center; margin-top: 3rem;">
-                    <a href="ai-strategy.html" class="btn btn-primary" style="background: var(--accent);">
+                    <a href="ai-strategy.html" class="btn btn-ai" style="background: var(--white); color: var(--accent);">
                         <i class="fas fa-robot"></i> Try AI Strategy Generator
                     </a>
                     <a href="contact.html" class="btn btn-secondary">
@@ -987,33 +892,49 @@
             }
         });
 
-        // Simple animations on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
+        // Animated counters
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const count = parseInt(counter.innerText.replace('+', '').replace('%', ''));
+                const increment = target / 100;
+                
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment) + 
+                        (counter.innerText.includes('+') ? '+' : 
+                         counter.innerText.includes('%') ? '%' : '');
+                    setTimeout(animateCounters, 20);
+                } else {
+                    counter.innerText = target + 
+                        (counter.innerText.includes('+') ? '+' : 
+                         counter.innerText.includes('%') ? '%' : '');
+                }
+            });
+        }
 
+        // Intersection Observer for animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('stats')) {
+                        setTimeout(animateCounters, 500);
+                    }
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }, observerOptions);
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        });
 
-        // Observe all elements with animate-slide-up class
-        document.querySelectorAll('.animate-slide-up').forEach(el => {
+        // Observe elements for animation
+        document.querySelectorAll('.hero-content, .feature-item, .stat-card').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(60px)';
             el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
             observer.observe(el);
-        });
-
-        // Mobile menu toggle (simplified)
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        mobileMenuBtn.addEventListener('click', () => {
-            alert('Mobile navigation would open here. In a full implementation, this would show the mobile menu.');
         });
 
         // Set active nav link
@@ -1022,6 +943,23 @@
             document.querySelectorAll('.nav-desktop a').forEach(link => {
                 if (link.getAttribute('href') === currentPage) {
                     link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
                 }
             });
         });
