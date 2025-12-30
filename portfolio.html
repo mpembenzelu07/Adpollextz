@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Ad Pollex - Digital Marketing Case Studies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== PORTFOLIO STYLES ===== */
+        :root {
+            --primary: #000000;
+            --primary-light: #1a1a1a;
+            --accent: #FF3B30;
+            --accent-dark: #CC0000;
+            --secondary: #007AFF;
+            --portfolio-blue: #1E3A8A;
+            --portfolio-teal: #0D9488;
+            --white: #FFFFFF;
+            --off-white: #F5F5F7;
+            --gray: #8E8E93;
+            --dark-gray: #1D1D1F;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --shadow-sm: 0 2px 20px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 10px 40px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 40px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--dark-gray);
+            background: var(--white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        h2 {
+            font-size: 3rem;
+            color: var(--primary);
+        }
+
+        h3 {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .lead {
+            font-size: 1.375rem;
+            color: var(--primary-light);
+            line-height: 1.6;
+        }
+
+        .eyebrow {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 0;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo-symbol {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-main {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary);
+            letter-spacing: -0.02em;
+        }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-desktop {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .nav-desktop a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 0.9375rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-desktop a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-desktop a:hover,
+        .nav-desktop a.active {
+            color: var(--accent);
+        }
+
+        .nav-desktop a:hover::after,
+        .nav-desktop a.active::after {
+            width: 100%;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: var(--radius-xl);
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(255, 59, 48, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 59, 48, 0.4);
+        }
+
+        .btn-portfolio {
+            background: linear-gradient(135deg, var(--portfolio-blue), var(--portfolio-teal));
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3);
+        }
+
+        .btn-portfolio:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(30, 58, 138, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-5px);
+        }
+
+        /* ===== PORTFOLIO HERO ===== */
+        .portfolio-hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--portfolio-blue) 0%, var(--portfolio-teal) 100%);
+            color: var(--white);
+            padding-top: 8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(13, 148, 136, 0.2) 0%, transparent 50%);
+        }
+
+        .portfolio-hero h1 {
+            color: var(--white);
+            background: linear-gradient(135deg, var(--white), #B9F2FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .portfolio-hero .lead {
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+        }
+
+        /* ===== FILTERS ===== */
+        .portfolio-filters {
+            background: var(--off-white);
+            padding: 3rem 0;
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .filters-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--white);
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover {
+            background: rgba(30, 58, 138, 0.05);
+            color: var(--portfolio-blue);
+            border-color: var(--portfolio-blue);
+        }
+
+        .filter-btn.active {
+            background: var(--portfolio-blue);
+            color: var(--white);
+            border-color: var(--portfolio-blue);
+        }
+
+        /* ===== PORTFOLIO GRID ===== */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-item {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-20px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-image img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(30, 58, 138, 0.9));
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-tag {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--portfolio-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .portfolio-content {
+            padding: 2rem;
+        }
+
+        .portfolio-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(30, 58, 138, 0.05);
+            border-radius: var(--radius-md);
+        }
+
+        .stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--portfolio-blue);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--gray);
+            margin-top: 0.25rem;
+        }
+
+        /* ===== CASE STUDY MODAL ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            max-width: 1000px;
+            margin: 2rem auto;
+            position: relative;
+            animation: modalSlide 0.3s ease-out;
+        }
+
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 44px;
+            height: 44px;
+            background: var(--white);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: var(--accent);
+            color: var(--white);
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            padding: 3rem 3rem 2rem;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .modal-body {
+            padding: 2rem 3rem 3rem;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 400px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .modal-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(30, 58, 138, 0.05);
+            border-radius: var(--radius-md);
+            border-top: 4px solid var(--portfolio-blue);
+        }
+
+        .modal-stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--portfolio-blue);
+            line-height: 1;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .portfolio-testimonials {
+            background: var(--off-white);
+        }
+
+        .testimonial-slider {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 2rem 0;
+            scrollbar-width: none;
+        }
+
+        .testimonial-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .testimonial-card {
+            flex: 0 0 400px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .testimonial-quote {
+            font-size: 1.25rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -1rem;
+            font-size: 4rem;
+            color: var(--portfolio-blue);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+
+        /* ===== CTA ===== */
+        .portfolio-cta {
+            background: linear-gradient(135deg, var(--portfolio-blue), var(--portfolio-teal));
+            color: var(--white);
+            text-align: center;
+        }
+
+        .portfolio-cta h2 {
+            color: var(--white);
+        }
+
+        .portfolio-cta .lead {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 6rem 0 3rem;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand {
+            max-width: 300px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            text-decoration: none;
+        }
+
+        .footer-logo .logo-symbol {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        .footer-logo .logo-main {
+            color: var(--white);
+        }
+
+        .footer-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h4 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1200px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-desktop {
+                display: none;
+            }
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            .modal-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            h1 {
+                font-size: 3rem;
+            }
+            h2 {
+                font-size: 2.5rem;
+            }
+            section {
+                padding: 4rem 0;
+            }
+            .portfolio-filters {
+                padding: 2rem 0;
+                top: 70px;
+            }
+            .filters-container {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+            .modal-content {
+                margin: 1rem auto;
+            }
+            .modal-header,
+            .modal-body {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="mainHeader">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-symbol">AP</div>
+                <div class="logo-text">
+                    <div class="logo-main">Ad Pollex</div>
+                    <div class="logo-sub">AI-Powered Marketing</div>
+                </div>
+            </a>
+            
+            <nav class="nav-desktop">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="ai-strategy.html">AI Strategy</a>
+                <a href="simulator.html">Simulator</a>
+                <a href="portfolio.html" class="active">Portfolio</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="dashboard.html" class="btn btn-primary">Client Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Portfolio Hero -->
+    <section class="portfolio-hero">
+        <div class="container">
+            <div class="eyebrow" style="color: #B9F2FF;">Success Stories</div>
+            <h1>Case Studies That <span style="display: block; color: #B9F2FF;">Drive Results</span></h1>
+            <p class="lead">Real projects, measurable outcomes. See how we've transformed businesses across Tanzania with AI-powered marketing strategies.</p>
+        </div>
+    </section>
+
+    <!-- Portfolio Filters -->
+    <section class="portfolio-filters">
+        <div class="container">
+            <div class="filters-container">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
+                <button class="filter-btn" data-filter="restaurant">Restaurant</button>
+                <button class="filter-btn" data-filter="technology">Technology</button>
+                <button class="filter-btn" data-filter="realestate">Real Estate</button>
+                <button class="filter-btn" data-filter="health">Health & Wellness</button>
+                <button class="filter-btn" data-filter="education">Education</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid -->
+    <section class="portfolio-grid-section">
+        <div class="container">
+            <div class="portfolio-grid" id="portfolioGrid">
+                <!-- E-commerce Project 1 -->
+                <div class="portfolio-item" data-category="ecommerce">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="E-commerce Success">
+                        <div class="portfolio-overlay">
+                            <div>
+                                <div class="portfolio-tags">
+                                    <span class="portfolio-tag">E-commerce</span>
+                                    <span class="portfolio-tag">Facebook Ads</span>
+                                    <span class="portfolio-tag">SEO</span>
+                                </div>
+                                <h3 style="color: white;">Fashion Retail Transformation</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Fashion Retail Transformation</h3>
+                        <p>A Tanzanian fashion startup struggling with online sales needed a complete digital overhaul.</p>
+                        
+                        <div class="portfolio-stats">
+                            <div class="stat">
+                                <div class="stat-value">200%</div>
+                                <div class="stat-label">Sales Growth</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">40%</div>
+                                <div class="stat-label">ROI Increase</div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-outline" onclick="openModal('modal1')">View Case Study →</button>
+                    </div>
+                </div>
+
+                <!-- Restaurant Project -->
+                <div class="portfolio-item" data-category="restaurant">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1551836026-d5c2c3af8f81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Restaurant Success">
+                        <div class="portfolio-overlay">
+                            <div>
+                                <div class="portfolio-tags">
+                                    <span class="portfolio-tag">Restaurant</span>
+                                    <span class="portfolio-tag">Instagram</span>
+                                    <span class="portfolio-tag">Social Media</span>
+                                </div>
+                                <h3 style="color: white;">Restaurant Digital Makeover</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Restaurant Digital Makeover</h3>
+                        <p>Upscale restaurant in Dar es Salaam needed to increase foot traffic and online orders.</p>
+                        
+                        <div class="portfolio-stats">
+                            <div class="stat">
+                                <div class="stat-value">300%</div>
+                                <div class="stat-label">Engagement</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">40%</div>
+                                <div class="stat-label">More Traffic</div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-outline" onclick="openModal('modal2')">View Case Study →</button>
+                    </div>
+                </div>
+
+                <!-- Technology Project -->
+                <div class="portfolio-item" data-category="technology">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Tech Success">
+                        <div class="portfolio-overlay">
+                            <div>
+                                <div class="portfolio-tags">
+                                    <span class="portfolio-tag">SaaS</span>
+                                    <span class="portfolio-tag">LinkedIn</span>
+                                    <span class="portfolio-tag">Content Marketing</span>
+                                </div>
+                                <h3 style="color: white;">SaaS Platform Launch</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>SaaS Platform Launch</h3>
+                        <p>Tech startup launching a B2B SaaS platform needed targeted lead generation strategy.</p>
+                        
+                        <div class="portfolio-stats">
+                            <div class="stat">
+                                <div class="stat-value">500+</div>
+                                <div class="stat-label">Qualified Leads</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">85%</div>
+                                <div class="stat-label">Demo Conversion</div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-outline" onclick="openModal('modal3')">View Case Study →</button>
+                    </div>
+                </div>
+
+                <!-- Real Estate Project -->
+                <div class="portfolio-item" data-category="realestate">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Real Estate Success">
+                        <div class="portfolio-overlay">
+                            <div>
+                                <div class="portfolio-tags">
+                                    <span class="portfolio-tag">Real Estate</span>
+                                    <span class="portfolio-tag">Google Ads</span>
+                                    <span class="portfolio-tag">YouTube</span>
+                                </div>
+                                <h3 style="color: white;">Luxury Property Marketing</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Luxury Property Marketing</h3>
+                        <p>Real estate developer needed to market high-end properties to international buyers.</p>
+                        
+                        <div class="portfolio-stats">
+                            <div class="stat">
+                                <div class="stat-value">$2.5M</div>
+                                <div class="stat-label">Property Sales</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">200%</div>
+                                <div class="stat-label">Inquiry Increase</div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-outline" onclick="openModal('modal4')">View Case Study →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="portfolio-testimonials">
+        <div class="container">
+            <div class="eyebrow">Client Testimonials</div>
+            <h2>What Our <span style="color: var(--portfolio-blue);">Clients Say</span></h2>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        "Ad Pollex transformed our e-commerce business. Their AI-powered strategy helped us achieve 200% growth in just 6 months. The campaign simulator accurately predicted our results."
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Client" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div>
+                            <h4 style="margin: 0;">James Mwinyi</h4>
+                            <p style="margin: 0; color: var(--gray); font-size: 0.875rem;">CEO, Fashion House Tanzania</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        "The AI Strategy Generator gave us a complete marketing plan that we could implement immediately. Our restaurant's social media engagement tripled, and we're now fully booked every weekend."
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Client" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div>
+                            <h4 style="margin: 0;">Sarah Juma</h4>
+                            <p style="margin: 0; color: var(--gray); font-size: 0.875rem;">Owner, Dar Grill House</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        "Working with Ad Pollex was the best investment we made. Their data-driven approach and AI tools helped us generate 500+ qualified leads for our SaaS platform launch."
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Client" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div>
+                            <h4 style="margin: 0;">David Omondi</h4>
+                            <p style="margin: 0; color: var(--gray); font-size: 0.875rem;">Founder, Tech Solutions Ltd</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="portfolio-cta">
+        <div class="container">
+            <h2>Ready to Be Our Next <span style="color: #B9F2FF;">Success Story?</span></h2>
+            <p class="lead">Let's create something extraordinary together.</p>
+            
+            <div style="margin-top: 3rem; display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                <a href="contact.html" class="btn btn-portfolio">
+                    <i class="fas fa-calendar"></i> Start Your Project
+                </a>
+                <a href="ai-strategy.html" class="btn btn-primary">
+                    <i class="fas fa-robot"></i> Generate AI Strategy
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo">
+                        <div class="logo-symbol">AP</div>
+                        <div class="logo-text">
+                            <div class="logo-main">Ad Pollex</div>
+                        </div>
+                    </a>
+                    <p class="footer-description">AI-powered digital marketing agency helping businesses grow their online presence since 2016.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="ai-strategy.html"><i class="fas fa-chevron-right"></i> AI Strategy Generator</a></li>
+                        <li><a href="simulator.html"><i class="fas fa-chevron-right"></i> Campaign Simulator</a></li>
+                        <li><a href="portfolio.html"><i class="fas fa-chevron-right"></i> Portfolio</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="services.html#digital-marketing"><i class="fas fa-chevron-right"></i> Digital Marketing</a></li>
+                        <li><a href="services.html#social-media"><i class="fas fa-chevron-right"></i> Social Media</a></li>
+                        <li><a href="services.html#seo"><i class="fas fa-chevron-right"></i> SEO Optimization</a></li>
+                        <li><a href="services.html#branding"><i class="fas fa-chevron-right"></i> Brand Strategy</a></li>
+                        <li><a href="services.html#web-design"><i class="fas fa-chevron-right"></i> Website Design</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Dar es Salaam, Tanzania</a></li>
+                        <li><a href="tel:+255684320325"><i class="fas fa-phone"></i> +255 684 320 325</a></li>
+                        <li><a href="mailto:adpollex@gmail.com"><i class="fas fa-envelope"></i> adpollex@gmail.com</a></li>
+                        <li><a href="#"><i class="fas fa-globe"></i> www.adpollex.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 <span style="color: var(--accent);">Ad Pollex</span> - AI-Powered Digital Marketing Agency. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal" id="modal1">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal1')">&times;</button>
+            <div class="modal-header">
+                <div class="eyebrow">Case Study • E-commerce</div>
+                <h2>Fashion Retail Transformation</h2>
+                <p class="lead">200% sales growth in 6 months for a Tanzanian fashion startup</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Fashion E-commerce">
+                </div>
+                
+                <h3>The Challenge</h3>
+                <p>A local fashion brand with beautiful products was struggling to convert website visitors into customers. Their online store had high traffic but low conversion rates, and their social media presence wasn't driving sales.</p>
+                
+                <h3>Our AI-Powered Solution</h3>
+                <p>We implemented a comprehensive digital marketing strategy enhanced by our proprietary AI technology:</p>
+                <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: var(--gray);">
+                    <li style="margin-bottom: 0.5rem;">AI-optimized Facebook and Instagram ad campaigns</li>
+                    <li style="margin-bottom: 0.5rem;">Predictive analytics for optimal posting times</li>
+                    <li style="margin-bottom: 0.5rem;">Automated retargeting sequences</li>
+                    <li style="margin-bottom: 0.5rem;">Personalized email marketing based on browsing behavior</li>
+                    <li>AI-powered product recommendation engine</li>
+                </ul>
+                
+                <div class="modal-stats">
+                    <div class="modal-stat">
+                        <div class="modal-stat-value">200%</div>
+                        <div class="stat-label">Sales Growth</div>
+                    </div>
+                    <div class="modal-stat">
+                        <div class="modal-stat-value">40%</div>
+                        <div class="stat-label">ROI Increase</div>
+                    </div>
+                    <div class="modal-stat">
+                        <div class="modal-stat-value">3.2x</div>
+                        <div class="stat-label">Conversion Rate</div>
+                    </div>
+                    <div class="modal-stat">
+                        <div class="modal-stat-value">$150K</div>
+                        <div class="stat-label">Monthly Revenue</div>
+                    </div>
+                </div>
+                
+                <h3>The Results</h3>
+                <p>Within 6 months, the fashion brand achieved:</p>
+                <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: var(--gray);">
+                    <li style="margin-bottom: 0.5rem;">200% increase in online sales</li>
+                    <li style="margin-bottom: 0.5rem;">40% improvement in marketing ROI</li>
+                    <li style="margin-bottom: 0.5rem;">3.2x higher conversion rate</li>
+                    <li>$150,000 in monthly revenue</li>
+                </ul>
+                
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid rgba(0, 0, 0, 0.05);">
+                    <a href="contact.html" class="btn btn-portfolio">
+                        <i class="fas fa-calendar"></i> Start Your Project
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal2">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal2')">&times;</button>
+            <div class="modal-header">
+                <div class="eyebrow">Case Study • Restaurant</div>
+                <h2>Restaurant Digital Makeover</h2>
+                <p class="lead">300% engagement increase and 40% more foot traffic</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img src="https://images.unsplash.com/photo-1551836026-d5c2c3af8f81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Restaurant">
+                </div>
+                
+                <h3>The Challenge</h3>
+                <p>An upscale restaurant in Dar es Salaam was struggling to attract younger customers and increase weekend bookings. Their social media presence was inconsistent, and they weren't leveraging online ordering effectively.</p>
+                
+                <h3>Our AI-Powered Solution</h3>
+                <p>We created a complete digital transformation strategy:</p>
+                <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: var(--gray);">
+                    <li style="margin-bottom: 0.5rem;">AI-generated content calendar for Instagram and Facebook</li>
+                    <li style="margin-bottom: 0.5rem;">Influencer partnership program</li>
+                    <li style="margin-bottom: 0.5rem;">Google My Business optimization</li>
+                    <li style="margin-bottom: 0.5rem;">Online reservation system integration</li>
+                    <li>Food delivery platform optimization</li>
+                </ul>
+                
+                <div class="modal-stats">
+                    <div class="modal-stat">
+                        <div class="modal-stat-value">300%</div>
+                        <div class="stat-label">Engagement Increase</div>
+                    </div>
+                    <div class="modal-stat">
+                        <div class="modal-stat-value">40%</div>
+                        <div class="stat-label">More Foot Traffic</div>
+                    </div>
+                    <div class="modal-stat">
+                        <div class="modal-stat-value">85%</div>
+                        <div class="stat-label">Weekend Occupancy</div>
+                    </div>
+                    <div class="modal-stat">
+                        <div class="modal-stat-value">$45K</div>
+                        <div class="stat-label">Monthly Revenue</div>
+                    </div>
+                </div>
+                
+                <h3>The Results</h3>
+                <p>After 4 months of implementation:</p>
+                <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: var(--gray);">
+                    <li style="margin-bottom: 0.5rem;">300% increase in social media engagement</li>
+                    <li style="margin-bottom: 0.5rem;">40% more foot traffic during weekdays</li>
+                    <li style="margin-bottom: 0.5rem;">85% weekend table occupancy</li>
+                    <li>$45,000 increase in monthly revenue</li>
+                </ul>
+                
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid rgba(0, 0, 0, 0.05);">
+                    <a href="contact.html" class="btn btn-portfolio">
+                        <i class="fas fa-calendar"></i> Start Your Project
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Portfolio filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filter items
+                const filter = this.dataset.filter;
+                
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, 10);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            }
+        });
+
+        // Testimonial slider
+        const testimonialSlider = document.querySelector('.testimonial-slider');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        testimonialSlider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - testimonialSlider.offsetLeft;
+            scrollLeft = testimonialSlider.scrollLeft;
+        });
+
+        testimonialSlider.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        testimonialSlider.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        testimonialSlider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - testimonialSlider.offsetLeft;
+            const walk = (x - startX) * 2;
+            testimonialSlider.scrollLeft = scrollLeft - walk;
+        });
+
+        // Set active nav link
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPage = window.location.pathname.split('/').pop();
+            document.querySelectorAll('.nav-desktop a').forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
