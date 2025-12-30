@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Strategy Generator | Ad Pollex - Generate Your Marketing Plan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== AI STRATEGY GENERATOR STYLES ===== */
+        :root {
+            --primary: #000000;
+            --primary-light: #1a1a1a;
+            --accent: #FF3B30;
+            --accent-dark: #CC0000;
+            --secondary: #007AFF;
+            --ai-blue: #00D4FF;
+            --white: #FFFFFF;
+            --off-white: #F5F5F7;
+            --gray: #8E8E93;
+            --dark-gray: #1D1D1F;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --shadow-sm: 0 2px 20px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 10px 40px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 40px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--dark-gray);
+            background: var(--white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        h2 {
+            font-size: 3rem;
+            color: var(--primary);
+        }
+
+        h3 {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .lead {
+            font-size: 1.375rem;
+            color: var(--primary-light);
+            line-height: 1.6;
+        }
+
+        .eyebrow {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 0;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo-symbol {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-main {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary);
+            letter-spacing: -0.02em;
+        }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-desktop {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .nav-desktop a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 0.9375rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-desktop a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-desktop a:hover,
+        .nav-desktop a.active {
+            color: var(--accent);
+        }
+
+        .nav-desktop a:hover::after,
+        .nav-desktop a.active::after {
+            width: 100%;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: var(--radius-xl);
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(255, 59, 48, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 59, 48, 0.4);
+        }
+
+        .btn-ai {
+            background: linear-gradient(135deg, var(--ai-blue), var(--secondary));
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-ai:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.4);
+        }
+
+        /* ===== AI HERO ===== */
+        .ai-hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+            color: var(--white);
+            padding-top: 8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 59, 48, 0.1) 0%, transparent 50%);
+        }
+
+        .ai-hero h1 {
+            color: var(--white);
+            background: linear-gradient(135deg, var(--ai-blue), var(--white));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .ai-hero .lead {
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+        }
+
+        /* ===== AI FORM ===== */
+        .ai-form-section {
+            background: var(--off-white);
+        }
+
+        .ai-form-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .ai-form {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius-md);
+            background: var(--off-white);
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--ai-blue);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%238E8E93' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.5rem center;
+            background-size: 16px;
+            padding-right: 3rem;
+        }
+
+        .form-slider {
+            width: 100%;
+            margin: 1rem 0;
+        }
+
+        .slider-value {
+            text-align: center;
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 1.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .form-checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            background: var(--off-white);
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+        }
+
+        .checkbox-label:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--ai-blue);
+        }
+
+        /* ===== AI PREVIEW ===== */
+        .ai-preview {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            border: 2px solid rgba(0, 212, 255, 0.2);
+            position: sticky;
+            top: 2rem;
+        }
+
+        .ai-preview-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .ai-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--ai-blue), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .ai-loading {
+            text-align: center;
+            padding: 3rem;
+            display: none;
+        }
+
+        .ai-loading.active {
+            display: block;
+        }
+
+        .ai-loading-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .ai-loading-dots span {
+            width: 12px;
+            height: 12px;
+            background: var(--ai-blue);
+            border-radius: 50%;
+            animation: aiPulse 1.4s ease-in-out infinite;
+        }
+
+        .ai-loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .ai-loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes aiPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+        }
+
+        .ai-results {
+            display: none;
+        }
+
+        .ai-results.active {
+            display: block;
+        }
+
+        .strategy-section {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .strategy-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .strategy-section h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .strategy-section h4 i {
+            color: var(--ai-blue);
+        }
+
+        .strategy-item {
+            background: var(--off-white);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 0.75rem;
+            border-left: 4px solid var(--ai-blue);
+        }
+
+        .strategy-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .metric {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: var(--radius-md);
+        }
+
+        .metric-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--ai-blue);
+            line-height: 1;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--gray);
+            margin-top: 0.5rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 6rem 0 3rem;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand {
+            max-width: 300px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            text-decoration: none;
+        }
+
+        .footer-logo .logo-symbol {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        .footer-logo .logo-main {
+            color: var(--white);
+        }
+
+        .footer-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h4 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .nav-desktop {
+                display: none;
+            }
+            .ai-form-container {
+                grid-template-columns: 1fr;
+            }
+            .ai-preview {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            h1 {
+                font-size: 3rem;
+            }
+            h2 {
+                font-size: 2.5rem;
+            }
+            section {
+                padding: 4rem 0;
+            }
+            .ai-form {
+                padding: 2rem;
+            }
+            .strategy-metrics {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="mainHeader">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-symbol">AP</div>
+                <div class="logo-text">
+                    <div class="logo-main">Ad Pollex</div>
+                    <div class="logo-sub">AI-Powered Marketing</div>
+                </div>
+            </a>
+            
+            <nav class="nav-desktop">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="ai-strategy.html" class="active">AI Strategy</a>
+                <a href="simulator.html">Simulator</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="dashboard.html" class="btn btn-primary">Client Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- AI Hero Section -->
+    <section class="ai-hero">
+        <div class="container">
+            <div class="eyebrow" style="color: var(--ai-blue);">AI Strategy Generator</div>
+            <h1>Generate Your Custom <span style="display: block; color: var(--ai-blue);">30-Day Marketing Plan</span></h1>
+            <p class="lead">Our proprietary AI analyzes your business and creates a complete marketing strategy with content calendar, budget allocation, and performance predictions.</p>
+            <div style="margin-top: 3rem;">
+                <a href="#ai-form" class="btn btn-ai">
+                    <i class="fas fa-robot"></i> Start Generating Strategy →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Form Section -->
+    <section class="ai-form-section" id="ai-form">
+        <div class="container">
+            <div class="eyebrow">AI-Powered Analysis</div>
+            <h2>Tell Us About Your <span style="color: var(--ai-blue);">Business</span></h2>
+            <p class="lead">The more details you provide, the more accurate your AI-generated strategy will be.</p>
+            
+            <div class="ai-form-container">
+                <!-- AI Form -->
+                <div class="ai-form">
+                    <form id="strategyForm">
+                        <div class="form-group">
+                            <label class="form-label">Business Name</label>
+                            <input type="text" class="form-control" id="businessName" placeholder="Enter your business name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Industry</label>
+                            <select class="form-control" id="industry" required>
+                                <option value="">Select your industry</option>
+                                <option value="ecommerce">E-commerce & Retail</option>
+                                <option value="restaurant">Restaurant & Food Service</option>
+                                <option value="technology">Technology & SaaS</option>
+                                <option value="health">Health & Wellness</option>
+                                <option value="education">Education & Training</option>
+                                <option value="realestate">Real Estate</option>
+                                <option value="tourism">Tourism & Hospitality</option>
+                                <option value="professional">Professional Services</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Target Audience</label>
+                            <input type="text" class="form-control" id="targetAudience" placeholder="e.g., Young professionals aged 25-40" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Monthly Marketing Budget</label>
+                            <input type="range" class="form-slider" id="budgetSlider" min="100" max="10000" step="100" value="2000">
+                            <div class="slider-value" id="budgetValue">$2,000 USD</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Primary Marketing Goal</label>
+                            <select class="form-control" id="primaryGoal" required>
+                                <option value="">Select primary goal</option>
+                                <option value="brand-awareness">Increase Brand Awareness</option>
+                                <option value="lead-generation">Generate More Leads</option>
+                                <option value="sales">Increase Sales/Revenue</option>
+                                <option value="engagement">Improve Customer Engagement</option>
+                                <option value="traffic">Drive Website Traffic</option>
+                                <option value="conversions">Increase Conversions</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Preferred Platforms</label>
+                            <div class="form-checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="platforms" value="facebook" checked>
+                                    <span>Facebook</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="platforms" value="instagram" checked>
+                                    <span>Instagram</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="platforms" value="tiktok">
+                                    <span>TikTok</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="platforms" value="google">
+                                    <span>Google Ads</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="platforms" value="linkedin">
+                                    <span>LinkedIn</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="platforms" value="twitter">
+                                    <span>Twitter</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Current Monthly Website Visitors</label>
+                            <select class="form-control" id="websiteTraffic" required>
+                                <option value="">Select traffic level</option>
+                                <option value="0-1000">0 - 1,000 visitors</option>
+                                <option value="1000-5000">1,000 - 5,000 visitors</option>
+                                <option value="5000-10000">5,000 - 10,000 visitors</option>
+                                <option value="10000-50000">10,000 - 50,000 visitors</option>
+                                <option value="50000+">50,000+ visitors</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Current Conversion Rate</label>
+                            <select class="form-control" id="conversionRate" required>
+                                <option value="">Select conversion rate</option>
+                                <option value="0-1">0% - 1%</option>
+                                <option value="1-2">1% - 2%</option>
+                                <option value="2-5">2% - 5%</option>
+                                <option value="5-10">5% - 10%</option>
+                                <option value="10+">10%+</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-ai" style="width: 100%; padding: 1.5rem;">
+                            <i class="fas fa-brain"></i> Generate AI Marketing Strategy
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- AI Preview -->
+                <div class="ai-preview">
+                    <div class="ai-preview-header">
+                        <div class="ai-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div>
+                            <h3 style="margin: 0; color: var(--ai-blue);">AI Strategy Preview</h3>
+                            <p style="margin: 0; color: var(--gray);">Your customized plan will appear here</p>
+                        </div>
+                    </div>
+                    
+                    <!-- AI Loading State -->
+                    <div class="ai-loading" id="aiLoading">
+                        <div class="ai-icon" style="margin: 0 auto 2rem;">
+                            <i class="fas fa-cog fa-spin"></i>
+                        </div>
+                        <h3 style="text-align: center;">AI Generating Your Strategy</h3>
+                        <p style="text-align: center;">Analyzing data and creating your customized 30-day marketing plan...</p>
+                        <div class="ai-loading-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    
+                    <!-- AI Results -->
+                    <div class="ai-results" id="aiResults">
+                        <div class="strategy-section">
+                            <h4><i class="fas fa-calendar-alt"></i> 30-Day Content Calendar</h4>
+                            <div class="strategy-item">
+                                <strong>Week 1:</strong> Brand awareness campaign focusing on [Industry] pain points
+                            </div>
+                            <div class="strategy-item">
+                                <strong>Week 2:</strong> Educational content series addressing [Target Audience] needs
+                            </div>
+                            <div class="strategy-item">
+                                <strong>Week 3:</strong> Promotional campaign with special offers
+                            </div>
+                            <div class="strategy-item">
+                                <strong>Week 4:</strong> Customer testimonials and case studies
+                            </div>
+                        </div>
+                        
+                        <div class="strategy-section">
+                            <h4><i class="fas fa-chart-pie"></i> Budget Allocation</h4>
+                            <div class="strategy-metrics">
+                                <div class="metric">
+                                    <div class="metric-value" id="metric-platforms">65%</div>
+                                    <div class="metric-label">Social Media Ads</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value" id="metric-content">25%</div>
+                                    <div class="metric-label">Content Creation</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value" id="metric-seo">10%</div>
+                                    <div class="metric-label">SEO Optimization</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="strategy-section">
+                            <h4><i class="fas fa-bullseye"></i> Expected Results</h4>
+                            <div class="strategy-item">
+                                <strong>Reach:</strong> 50,000 - 75,000 people in your target audience
+                            </div>
+                            <div class="strategy-item">
+                                <strong>Engagement:</strong> 5,000 - 10,000 interactions
+                            </div>
+                            <div class="strategy-item">
+                                <strong>Leads:</strong> 500 - 1,000 qualified leads
+                            </div>
+                            <div class="strategy-item">
+                                <strong>ROI:</strong> 3x - 5x return on ad spend
+                            </div>
+                        </div>
+                        
+                        <div class="strategy-section">
+                            <h4><i class="fas fa-lightbulb"></i> AI Recommendations</h4>
+                            <div class="strategy-item">
+                                Focus on [Primary Platform] for highest engagement with [Target Audience]
+                            </div>
+                            <div class="strategy-item">
+                                Post during peak hours: 7-9 PM for maximum visibility
+                            </div>
+                            <div class="strategy-item">
+                                Use video content for 3x higher engagement rates
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid rgba(0, 212, 255, 0.2);">
+                            <a href="contact.html" class="btn btn-ai" style="width: 100%;">
+                                <i class="fas fa-download"></i> Download Full Strategy PDF
+                            </a>
+                            <p style="text-align: center; margin-top: 1rem; font-size: 0.875rem; color: var(--gray);">
+                                For implementation and expert guidance, book a free consultation
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo">
+                        <div class="logo-symbol">AP</div>
+                        <div class="logo-text">
+                            <div class="logo-main">Ad Pollex</div>
+                        </div>
+                    </a>
+                    <p class="footer-description">AI-powered digital marketing agency helping businesses grow their online presence since 2016.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="ai-strategy.html"><i class="fas fa-chevron-right"></i> AI Strategy Generator</a></li>
+                        <li><a href="simulator.html"><i class="fas fa-chevron-right"></i> Campaign Simulator</a></li>
+                        <li><a href="portfolio.html"><i class="fas fa-chevron-right"></i> Portfolio</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="services.html#digital-marketing"><i class="fas fa-chevron-right"></i> Digital Marketing</a></li>
+                        <li><a href="services.html#social-media"><i class="fas fa-chevron-right"></i> Social Media</a></li>
+                        <li><a href="services.html#seo"><i class="fas fa-chevron-right"></i> SEO Optimization</a></li>
+                        <li><a href="services.html#branding"><i class="fas fa-chevron-right"></i> Brand Strategy</a></li>
+                        <li><a href="services.html#web-design"><i class="fas fa-chevron-right"></i> Website Design</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Dar es Salaam, Tanzania</a></li>
+                        <li><a href="tel:+255684320325"><i class="fas fa-phone"></i> +255 684 320 325</a></li>
+                        <li><a href="mailto:adpollex@gmail.com"><i class="fas fa-envelope"></i> adpollex@gmail.com</a></li>
+                        <li><a href="#"><i class="fas fa-globe"></i> www.adpollex.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 <span style="color: var(--accent);">Ad Pollex</span> - AI-Powered Digital Marketing Agency. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Budget slider
+        const budgetSlider = document.getElementById('budgetSlider');
+        const budgetValue = document.getElementById('budgetValue');
+        
+        budgetSlider.addEventListener('input', () => {
+            const value = parseInt(budgetSlider.value);
+            budgetValue.textContent = `$${value.toLocaleString()} USD`;
+            
+            // Update AI preview metrics based on budget
+            updateAIPreview();
+        });
+
+        // Update AI preview based on form inputs
+        function updateAIPreview() {
+            const industry = document.getElementById('industry').value;
+            const budget = parseInt(budgetSlider.value);
+            const platforms = document.querySelectorAll('input[name="platforms"]:checked');
+            
+            // Update platform allocation based on number of platforms selected
+            if (platforms.length > 0) {
+                const platformPercentage = Math.min(70, 40 + (platforms.length * 10));
+                document.getElementById('metric-platforms').textContent = `${platformPercentage}%`;
+                document.getElementById('metric-content').textContent = `${Math.floor((100 - platformPercentage) * 0.7)}%`;
+                document.getElementById('metric-seo').textContent = `${Math.floor((100 - platformPercentage) * 0.3)}%`;
+            }
+        }
+
+        // Form submission for AI strategy generation
+        document.getElementById('strategyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const businessName = document.getElementById('businessName').value;
+            const industry = document.getElementById('industry').value;
+            const targetAudience = document.getElementById('targetAudience').value;
+            const budget = parseInt(budgetSlider.value);
+            const primaryGoal = document.getElementById('primaryGoal').value;
+            const websiteTraffic = document.getElementById('websiteTraffic').value;
+            const conversionRate = document.getElementById('conversionRate').value;
+            
+            // Validate form
+            if (!businessName || !industry || !targetAudience || !primaryGoal || !websiteTraffic || !conversionRate) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Show loading state
+            document.getElementById('aiLoading').classList.add('active');
+            document.getElementById('aiResults').classList.remove('active');
+            
+            // Simulate AI processing time
+            setTimeout(() => {
+                // Hide loading state
+                document.getElementById('aiLoading').classList.remove('active');
+                
+                // Show results with custom data
+                document.getElementById('aiResults').classList.add('active');
+                
+                // Scroll to results
+                document.getElementById('aiResults').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Update results with form data
+                updateStrategyResults({
+                    businessName,
+                    industry,
+                    targetAudience,
+                    budget,
+                    primaryGoal,
+                    websiteTraffic,
+                    conversionRate
+                });
+            }, 3000);
+            
+            // Update preview while waiting
+            updateAIPreview();
+        });
+
+        // Update strategy results with form data
+        function updateStrategyResults(data) {
+            // Update strategy sections based on form data
+            const industryMap = {
+                'ecommerce': 'E-commerce',
+                'restaurant': 'Restaurant & Food Service',
+                'technology': 'Technology',
+                'health': 'Health & Wellness',
+                'education': 'Education',
+                'realestate': 'Real Estate',
+                'tourism': 'Tourism',
+                'professional': 'Professional Services',
+                'other': 'your industry'
+            };
+            
+            const goalMap = {
+                'brand-awareness': 'brand awareness',
+                'lead-generation': 'lead generation',
+                'sales': 'sales increase',
+                'engagement': 'customer engagement',
+                'traffic': 'website traffic',
+                'conversions': 'conversion rate improvement'
+            };
+            
+            // Update content calendar based on industry
+            const week1Text = `Brand awareness campaign focusing on ${industryMap[data.industry] || data.industry} pain points`;
+            const week2Text = `Educational content series addressing ${data.targetAudience} needs`;
+            const week3Text = `Promotional campaign with special offers for ${goalMap[data.primaryGoal] || data.primaryGoal}`;
+            const week4Text = `Customer testimonials and case studies showcasing ${industryMap[data.industry] || data.industry} success`;
+            
+            // Update strategy items
+            const strategyItems = document.querySelectorAll('.strategy-item');
+            if (strategyItems.length >= 4) {
+                strategyItems[0].innerHTML = `<strong>Week 1:</strong> ${week1Text}`;
+                strategyItems[1].innerHTML = `<strong>Week 2:</strong> ${week2Text}`;
+                strategyItems[2].innerHTML = `<strong>Week 3:</strong> ${week3Text}`;
+                strategyItems[3].innerHTML = `<strong>Week 4:</strong> ${week4Text}`;
+            }
+            
+            // Update expected results based on budget
+            const reach = Math.floor(data.budget * 25); // 25 people reached per dollar
+            const engagement = Math.floor(data.budget * 2.5); // 2.5 engagements per dollar
+            const leads = Math.floor(data.budget * 0.25); // 0.25 leads per dollar
+            
+            if (strategyItems.length >= 8) {
+                strategyItems[4].innerHTML = `<strong>Reach:</strong> ${reach.toLocaleString()} - ${(reach * 1.5).toLocaleString()} people in your target audience`;
+                strategyItems[5].innerHTML = `<strong>Engagement:</strong> ${engagement.toLocaleString()} - ${(engagement * 2).toLocaleString()} interactions`;
+                strategyItems[6].innerHTML = `<strong>Leads:</strong> ${leads.toLocaleString()} - ${(leads * 2).toLocaleString()} qualified leads`;
+                strategyItems[7].innerHTML = `<strong>ROI:</strong> 3x - 5x return on ad spend`;
+            }
+            
+            // Update AI recommendations
+            const platforms = Array.from(document.querySelectorAll('input[name="platforms"]:checked')).map(cb => cb.value);
+            const primaryPlatform = platforms.length > 0 ? platforms[0].charAt(0).toUpperCase() + platforms[0].slice(1) : 'your primary platform';
+            
+            if (strategyItems.length >= 11) {
+                strategyItems[8].textContent = `Focus on ${primaryPlatform} for highest engagement with ${data.targetAudience}`;
+                strategyItems[9].textContent = `Post during peak hours: 7-9 PM for maximum visibility`;
+                strategyItems[10].textContent = `Use video content for 3x higher engagement rates`;
+            }
+        }
+
+        // Update preview when form changes
+        document.querySelectorAll('#strategyForm input, #strategyForm select').forEach(element => {
+            element.addEventListener('change', updateAIPreview);
+        });
+
+        // Set active nav link
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPage = window.location.pathname.split('/').pop();
+            document.querySelectorAll('.nav-desktop a').forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Initialize budget display
+            updateAIPreview();
+        });
+    </script>
+</body>
+</html>
